@@ -1,10 +1,16 @@
 using UnityEngine;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+using System;
 
 public class DataPersistenceManager : MonoBehaviour
 {
     public static DataPersistenceManager instance {  get; private set; }
 
     private GameData gameData;
+
+    private List<IDataPersistence> dataPersistenceObjects;
 
     private void Initialise()
     {
@@ -20,7 +26,15 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Start()
     {
+        this.dataPersistenceObjects = FindAllDPO();
         LoadGame();
+    }
+
+    private List<IDataPersistence> FindAllDPO()
+    {
+        IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>().OfType<IDataPersistence>();
+
+        return new List<IDataPersistence>(dataPersistenceObjects);
     }
 
     private void OnApplicationQuit()
@@ -35,7 +49,12 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void SaveGame()
     {
-        //TODO: pass data to other scripts so they can update it
+        //pass data to other scripts so they can update it
+
+        foreach (IDataPersistence dPO in dataPersistenceObjects)
+        {
+            dPO.SaveData(ref gameData);
+        }
 
         //TODO: save data to file using the data handler
     }
@@ -51,6 +70,11 @@ public class DataPersistenceManager : MonoBehaviour
             NewGame();
         }
 
-        //TODO: push the loaded data to all other scripts that need it
+        //push the loaded data to all other scripts that need it
+
+        foreach(IDataPersistence dPO in dataPersistenceObjects)
+        {
+            dPO.LoadData(gameData);
+        }
     }
 }
