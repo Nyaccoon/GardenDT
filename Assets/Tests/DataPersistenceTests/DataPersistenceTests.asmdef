@@ -1,5 +1,5 @@
 {
-    "name": "UnitTests",
+    "name": "DataPersistenceTests",
     "optionalUnityReferences": [
         "TestAssemblies"
     ],
