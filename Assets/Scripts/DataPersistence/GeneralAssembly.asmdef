@@ -1,14 +1,11 @@
 {
-    "name": "DataPersistenceTests",
-    "rootNamespace": "Script",
+    "name": "General Assembly",
+    "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
-        "General Assembly"
+        "UnityEditor.TestRunner"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
