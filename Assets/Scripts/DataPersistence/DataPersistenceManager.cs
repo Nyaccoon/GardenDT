@@ -54,36 +54,56 @@ public class DataPersistenceManager : MonoBehaviour
         this.gameData = new GameData();
     }
 
-    public void SaveGame()
+    public bool SaveGame()
     {
-        //pass data to other scripts so they can update it
-
-        foreach (IDataPersistence dPO in dataPersistenceObjects)
+        try
         {
-            dPO.SaveData(ref gameData);
+            //pass data to other scripts so they can update it
+
+            foreach (IDataPersistence dPO in dataPersistenceObjects)
+            {
+                dPO.SaveData(ref gameData);
+            }
+
+            //save data to file using the data handler
+            dataHandler.Save(gameData);
+        }
+        catch(Exception e)
+        {
+            Debug.Log("Failed to save the game: " + e.Message);
+            return false;
         }
 
-        //save data to file using the data handler
-        dataHandler.Save(gameData);
+        return true;
     }
 
-    public void LoadGame()
+    public bool LoadGame()
     {
-        //Load any saved data from a file using the data handler
-        this.gameData = dataHandler.Load();
-
-        //if no data can be loaded, initialise to a new game
-        if(this.gameData == null)
+        try
         {
-            Debug.Log("No data was found. Initialising data to defaults.");
-            NewGame();
+            //Load any saved data from a file using the data handler
+            this.gameData = dataHandler.Load();
+
+            //if no data can be loaded, initialise to a new game
+            if (this.gameData == null)
+            {
+                Debug.Log("No data was found. Initialising data to defaults.");
+                NewGame();
+            }
+
+            //push the loaded data to all other scripts that need it
+
+            foreach (IDataPersistence dPO in dataPersistenceObjects)
+            {
+                dPO.LoadData(gameData);
+            }
+        }
+        catch(Exception e)
+        {
+            Debug.Log("Failed to load the game: " + e.Message);
+            return false;
         }
 
-        //push the loaded data to all other scripts that need it
-
-        foreach(IDataPersistence dPO in dataPersistenceObjects)
-        {
-            dPO.LoadData(gameData);
-        }
+        return true;
     }
 }
