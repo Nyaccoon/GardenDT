@@ -57,36 +57,11 @@ using System;
 
         public bool SaveGame()
         {
-            DPMLogic.SaveGameLogic(dataPersistenceObjects);
+            DPMLogic.SaveGameLogic(dataPersistenceObjects, dataHandler, gameData);
         }
 
         public bool LoadGame()
         {
-            try
-            {
-                //Load any saved data from a file using the data handler
-                this.gameData = dataHandler.Load();
-
-                //if no data can be loaded, initialise to a new game
-                if (this.gameData == null)
-                {
-                    Debug.Log("No data was found. Initialising data to defaults.");
-                    NewGame();
-                }
-
-                //push the loaded data to all other scripts that need it
-
-                foreach (IDataPersistence dPO in dataPersistenceObjects)
-                {
-                    dPO.LoadData(gameData);
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log("Failed to load the game: " + e.Message);
-                return false;
-            }
-
-            return true;
+            DPMLogic.LoadGameLogic(dataPersistenceObjects, dataHandler, gameData);
         }
     }
