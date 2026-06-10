@@ -1,16 +1,9 @@
+using System;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Data/Building")]
 public class BuildingData : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [field:SerializeField] public BuildingModel model { get; private set; }
+    [field:SerializeField] public Enums.FloorType floorType { get; private set; }
 }
