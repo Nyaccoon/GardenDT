@@ -14,4 +14,10 @@ public static class Enums
         Pond,
         Dirt
     }
+
+    public enum PreviewState
+    {
+        Positive,
+        Negative
+    }
 }
