@@ -47,6 +47,26 @@ public class BuildingGrid : MonoBehaviour
         int y = Mathf.FloorToInt((worldPosition - transform.position).z / BuildingSystem.cellSize);
         return (x, y);
     }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.lightGoldenRodYellow;
+        if (BuildingSystem.cellSize <= 0 || width <= 0 || height <= 0) return;
+        Vector3 origin = transform.position;
+        for(int y = 0; y <= height; y++)
+        {
+            Vector3 start = origin + new Vector3(0, 0.01f, y *  BuildingSystem.cellSize);
+            Vector3 end = origin + new Vector3(width * BuildingSystem.cellSize, 0.01f, y * BuildingSystem.cellSize);
+            Gizmos.DrawLine(start, end);
+        }
+
+        for (int x = 0; x <= height; x++)
+        {
+            Vector3 start = origin + new Vector3(x * BuildingSystem.cellSize, 0.01f, 0);
+            Vector3 end = origin + new Vector3(x * BuildingSystem.cellSize, 0.01f, height * BuildingSystem.cellSize);
+            Gizmos.DrawLine(start, end);
+        }
+    }
 }
 
 public class BuildingGridCell
