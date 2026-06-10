@@ -40,7 +40,8 @@ public static class DPMLogic
             if (gameData == null) 
             {
                 Debug.Log("No data was found. Initialising data to defaults.");
-                NewGame();
+                //NewGame();
+                //TODO fix later
             }
 
             //push the loaded data to all other scripts that need it

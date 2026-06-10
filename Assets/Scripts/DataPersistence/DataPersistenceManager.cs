@@ -33,6 +33,7 @@ using System;
 
         private void Start()
         {
+        
             this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
             this.dataPersistenceObjects = FindAllDPO();
             LoadGame();
@@ -58,10 +59,12 @@ using System;
         public bool SaveGame()
         {
             DPMLogic.SaveGameLogic(dataPersistenceObjects, dataHandler, gameData);
+            return true;
         }
 
         public bool LoadGame()
         {
             DPMLogic.LoadGameLogic(dataPersistenceObjects, dataHandler, gameData);
+            return true;
         }
     }
