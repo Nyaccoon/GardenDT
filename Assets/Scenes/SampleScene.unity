@@ -617,8 +617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad6ee49b2da1f5543a7bcc7a608f3133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildingGrid
-  width: 10
-  height: 10
 --- !u!1 &1949005912
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,8 +646,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97cf46b09407db84c86db825443f0dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloorBuilding
-  width: 10
-  height: 10
   _cube: {fileID: 4418394487807398191, guid: 411140b186fced64bb1edfe65eef389b, type: 3}
 --- !u!4 &1949005914
 Transform:
