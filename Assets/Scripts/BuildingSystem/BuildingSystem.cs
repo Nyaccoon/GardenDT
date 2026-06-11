@@ -43,7 +43,7 @@ public class BuildingSystem : MonoBehaviour
         if (canBuild)
         {
             preview.transform.position = GetSnappedCentrePosition(buildPositions);
-            preview.ChangeState(Enums.PreviewState.Positive);
+            preview.ChangeState(Support.PreviewState.Positive);
             if (Input.GetMouseButtonDown(0))
             {
                 PlaceBuilding(buildPositions);
@@ -51,7 +51,7 @@ public class BuildingSystem : MonoBehaviour
         }
         else
         {
-            preview.ChangeState(Enums.PreviewState.Negative);
+            preview.ChangeState(Support.PreviewState.Negative);
         }
 
         if (Input.GetKeyDown(KeyCode.R))

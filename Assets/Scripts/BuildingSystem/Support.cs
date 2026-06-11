@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public static class Enums
+public static class Support
 {
+    public const int GridWidth = 10;
+    public const int GridHeight = 10;
+
     public enum FloorType
     {
         Grass,

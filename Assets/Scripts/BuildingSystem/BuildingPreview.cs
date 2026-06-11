@@ -6,7 +6,7 @@ public class BuildingPreview : MonoBehaviour
     [SerializeField] private Material PositiveMaterial;
     [SerializeField] private Material NegativeMaterial;
 
-    public Enums.PreviewState _state { get; private set; } = Enums.PreviewState.Negative;
+    public Support.PreviewState _state { get; private set; } = Support.PreviewState.Negative;
     public BuildingData _data { get; private set; }
     public BuildingModel model { get; private set; }
     private List<Renderer> renderers = new();
@@ -26,7 +26,7 @@ public class BuildingPreview : MonoBehaviour
         SetPreviewMaterial(_state);
     }
 
-    public void ChangeState(Enums.PreviewState state)
+    public void ChangeState(Support.PreviewState state)
     {
         if (state == _state) return;
         _state = state;
@@ -38,9 +38,9 @@ public class BuildingPreview : MonoBehaviour
         model.Rotate(rotationStep);
     }
 
-    private void SetPreviewMaterial(Enums.PreviewState state)
+    private void SetPreviewMaterial(Support.PreviewState state)
     {
-        Material previewMat = state == Enums.PreviewState.Positive ? PositiveMaterial : NegativeMaterial;
+        Material previewMat = state == Support.PreviewState.Positive ? PositiveMaterial : NegativeMaterial;
         foreach(var rend in renderers)
         {
             Material[] mats = new Material[rend.sharedMaterials.Length];

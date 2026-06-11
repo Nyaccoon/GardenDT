@@ -5,5 +5,5 @@ using UnityEngine;
 public class BuildingData : ScriptableObject
 {
     [field: SerializeField] public BuildingModel model { get; private set; }
-    [field: SerializeField] public Enums.FloorType floorType { get; private set; }
+    [field: SerializeField] public Support.FloorType floorType { get; private set; }
 }

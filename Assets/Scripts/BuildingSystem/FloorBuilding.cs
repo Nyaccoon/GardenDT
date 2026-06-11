@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class FloorBuilding : MonoBehaviour
 {
-    [SerializeField] private int width;
-    [SerializeField] private int height;
+    private int width = Support.GridWidth;
+    private int height = Support.GridHeight;
     [SerializeField] private Transform _cube;
 
     public void Start()

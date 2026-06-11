@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BuildingGrid : MonoBehaviour
 {
-    [SerializeField] private int width;
-    [SerializeField] private int height;
+    private int width = Support.GridWidth;
+    private int height = Support.GridHeight;
     private BuildingGridCell[,] grid;
     
     private void Start()
