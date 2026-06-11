@@ -36,7 +36,6 @@ public class BuildingGrid : MonoBehaviour
             (int x, int y) = WorldToGridPosition(p);
             if (x < 0 || x >= width || y < 0 || y >= height) return false;
             if (!grid[x, y].IsEmpty()) return false;
-
         }
         return true;
     }
@@ -55,12 +54,12 @@ public class BuildingGrid : MonoBehaviour
         Vector3 origin = transform.position;
         for(int y = 0; y <= height; y++)
         {
-            Vector3 start = origin + new Vector3(0, 0.01f, y *  BuildingSystem.cellSize);
+            Vector3 start = origin + new Vector3(0, 0.01f, y * BuildingSystem.cellSize);
             Vector3 end = origin + new Vector3(width * BuildingSystem.cellSize, 0.01f, y * BuildingSystem.cellSize);
             Gizmos.DrawLine(start, end);
         }
 
-        for (int x = 0; x <= height; x++)
+        for (int x = 0; x <= width; x++)
         {
             Vector3 start = origin + new Vector3(x * BuildingSystem.cellSize, 0.01f, 0);
             Vector3 end = origin + new Vector3(x * BuildingSystem.cellSize, 0.01f, height * BuildingSystem.cellSize);

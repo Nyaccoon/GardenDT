@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4586821900076392}
   - component: {fileID: 33222949445572694}
   - component: {fileID: 23050206849376476}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rpgpp_lt_tree_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4124549155459071126}
   - component: {fileID: 804839452087818505}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BuildingShapeUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9152932987529182386}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5839119176939201642}
   - component: {fileID: 9182600566031820458}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}

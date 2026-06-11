@@ -72,7 +72,7 @@ public class BuildingSystem : MonoBehaviour
     private Vector3 GetSnappedCentrePosition(List<Vector3> allBuildingPositions)
     {
         List<int> xs = allBuildingPositions.Select(p => Mathf.FloorToInt(p.x)).ToList();
-        List<int> zs = allBuildingPositions.Select(p => Mathf.FloorToInt(p.x)).ToList();
+        List<int> zs = allBuildingPositions.Select(p => Mathf.FloorToInt(p.z)).ToList();
         float centreX = (xs.Min() + xs.Max()) / 2f + cellSize / 2f;
         float centreZ = (zs.Min() + zs.Max()) / 2f + cellSize / 2f;
         return new(centreX, 0, centreZ);
