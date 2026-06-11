@@ -51,6 +51,4 @@ public class BuildingPreview : MonoBehaviour
             rend.materials = mats;
         }
     }
-
-
 }
