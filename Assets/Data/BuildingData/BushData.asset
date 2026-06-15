@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c970fcc75f6e8d547b29207d74d7c364, type: 3}
-  m_Name: TreeData
+  m_Name: BushData
   m_EditorClassIdentifier: Assembly-CSharp::BuildingData
-  <model>k__BackingField: {fileID: 9182600566031820458, guid: ae7a59a1f843dc94eae98a9e7d958b6e, type: 3}
-  <floorType>k__BackingField: 3
+  <model>k__BackingField: {fileID: 8733088684299032143, guid: c62472e7d3df62f40917d9064c0be11c, type: 3}
+  <floorType>k__BackingField: 5
