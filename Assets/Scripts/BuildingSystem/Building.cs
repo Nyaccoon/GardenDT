@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class Building : MonoBehaviour
 {
     private BuildingModel model;
-    private BuildingData data;
+    public BuildingData data;
     public void Setup(BuildingData data, float rotation)
     {
         this.data = data;
