@@ -14,4 +14,9 @@ public class Building : MonoBehaviour
         model = Instantiate(data.model, transform.position, Quaternion.identity, transform);
         model.Rotate(rotation);
     }
+
+    public BuildingData GetData()
+    {
+        return data;
+    }
 }

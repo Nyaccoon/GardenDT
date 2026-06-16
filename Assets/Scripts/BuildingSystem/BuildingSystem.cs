@@ -87,6 +87,18 @@ public class BuildingSystem : MonoBehaviour
         allBuildings.Add(building);
     }
 
+    //private void PlaceFloor()
+    //{
+    //    for (int x = 0; x < Support.GridWidth; x++)
+    //    {
+    //        for (int y = 0; y < Support.GridHeight; y++)
+    //        {
+    //            FloorBuilding newObject = Instantiate(cubePrefab, new Vector3(x * BuildingSystem.cellSize + 0.5f, -0.5f, y * BuildingSystem.cellSize + 0.5f), Quaternion.identity);
+    //            newObject.SetParent(transform);
+    //        }
+    //    }
+    //}
+
     private Vector3 GetSnappedCentrePosition(List<Vector3> allBuildingPositions)
     {
         List<int> xs = allBuildingPositions.Select(p => Mathf.FloorToInt(p.x)).ToList();
