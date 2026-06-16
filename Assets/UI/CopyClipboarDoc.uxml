@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; justify-content: center; align-items: center;">
+        <ui:GroupBox style="width: 30%; height: 30%; background-color: rgb(212, 201, 201); justify-content: space-between;">
+            <ui:Label text="Press the button to copy" style="font-size: 16px;"/>
+            <ui:Label text="1. press the button&#10;2. copy to an empty text or json file&#10;3. save the file" style="font-size: 10px;"/>
+            <ui:Button text="Copy to clipboard" name="CopyButton" style="background-color: rgb(139, 211, 229);"/>
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>
