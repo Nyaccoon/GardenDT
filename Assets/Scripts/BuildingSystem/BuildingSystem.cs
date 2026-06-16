@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,10 +8,15 @@ public class BuildingSystem : MonoBehaviour
 
     [SerializeField] private BuildingData treeData;
     [SerializeField] private BuildingData bushData;
+    [SerializeField] private BuildingData flowerData;
+    [SerializeField] private BuildingData vegGarData;
+    [SerializeField] private BuildingData trampData;
     [SerializeField] private BuildingPreview previewPrefab;
     [SerializeField] private Building buildingPrefab;
     [SerializeField] private BuildingGrid grid;
     private BuildingPreview preview;
+
+    private List<Building> allBuildings = new();
 
     private void Update()
     {
@@ -31,6 +35,18 @@ public class BuildingSystem : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 preview = CreatePreview(bushData, mousePos);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                preview = CreatePreview(flowerData, mousePos);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                preview = CreatePreview(vegGarData, mousePos);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                preview = CreatePreview(trampData, mousePos);
             }
         }
     }
@@ -67,6 +83,8 @@ public class BuildingSystem : MonoBehaviour
         grid.SetBuilding(building, buildingPositions);
         Destroy(preview.gameObject);
         preview = null;
+
+        allBuildings.Add(building);
     }
 
     private Vector3 GetSnappedCentrePosition(List<Vector3> allBuildingPositions)
@@ -94,5 +112,10 @@ public class BuildingSystem : MonoBehaviour
         BuildingPreview buildingPreview = Instantiate(previewPrefab, position, Quaternion.identity);
         buildingPreview.Setup(data);
         return buildingPreview;
+    }
+
+    public List<Building> GetAllBuildings()
+    {
+        return allBuildings;
     }
 }
