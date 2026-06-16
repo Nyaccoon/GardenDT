@@ -17,6 +17,8 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private BuildingGrid grid;
     private BuildingPreview preview;
 
+    private List<Building> allBuildings;
+
     private void Update()
     {
         Vector3 mousePos = GetWorldMousePosition();
@@ -82,6 +84,8 @@ public class BuildingSystem : MonoBehaviour
         grid.SetBuilding(building, buildingPositions);
         Destroy(preview.gameObject);
         preview = null;
+
+        allBuildings.Add(building);
     }
 
     private Vector3 GetSnappedCentrePosition(List<Vector3> allBuildingPositions)
@@ -109,5 +113,10 @@ public class BuildingSystem : MonoBehaviour
         BuildingPreview buildingPreview = Instantiate(previewPrefab, position, Quaternion.identity);
         buildingPreview.Setup(data);
         return buildingPreview;
+    }
+
+    public List<Building> GetAllBuildings()
+    {
+        return allBuildings;
     }
 }
