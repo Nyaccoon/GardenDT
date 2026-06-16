@@ -11,6 +11,7 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private BuildingData bushData;
     [SerializeField] private BuildingData flowerData;
     [SerializeField] private BuildingData vegGarData;
+    [SerializeField] private BuildingData trampData;
     [SerializeField] private BuildingPreview previewPrefab;
     [SerializeField] private Building buildingPrefab;
     [SerializeField] private BuildingGrid grid;
@@ -41,6 +42,10 @@ public class BuildingSystem : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 preview = CreatePreview(vegGarData, mousePos);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                preview = CreatePreview(trampData, mousePos);
             }
         }
     }
