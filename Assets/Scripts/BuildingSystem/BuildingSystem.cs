@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,7 +16,7 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private BuildingGrid grid;
     private BuildingPreview preview;
 
-    private List<Building> allBuildings;
+    private List<Building> allBuildings = new();
 
     private void Update()
     {
