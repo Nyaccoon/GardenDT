@@ -515,7 +515,6 @@ MonoBehaviour:
   bushData: {fileID: 11400000, guid: 3228e4294d22d9d49b478a68de860679, type: 2}
   flowerData: {fileID: 11400000, guid: 88f2b3911bfdc1643b506504b880d527, type: 2}
   vegGarData: {fileID: 11400000, guid: 8203737404d6d2142a51594a8ec3d400, type: 2}
-  trampData: {fileID: 11400000, guid: a7469e9a22579dc419d256a57e17d294, type: 2}
   previewPrefab: {fileID: 2948508113742318247, guid: 8b1fd86d70366d2428c541cbd9f17a8b, type: 3}
   buildingPrefab: {fileID: 4235606000567523324, guid: ffac01ea145474b4589c1db316f55af6, type: 3}
   grid: {fileID: 1727710357}

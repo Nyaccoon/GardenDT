@@ -7,15 +7,13 @@ public static class Support
 
     public enum FloorType
     {
+        Paved,
+        LeakThrough,
+        Unpaved,
         Grass,
         Flower,
         Bush,
-        Tree,
-        Tile,
-        LeakThroughTiles,
-        Gravel,
-        Pond,
-        Dirt
+        Tree
     }
 
     public enum PreviewState

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c970fcc75f6e8d547b29207d74d7c364, type: 3}
-  m_Name: TreeData
-  m_EditorClassIdentifier: Assembly-CSharp::BuildingData
-  <model>k__BackingField: {fileID: 9182600566031820458, guid: ae7a59a1f843dc94eae98a9e7d958b6e, type: 3}
+  m_Script: {fileID: 11500000, guid: abd775c75e48eba4cbed66116582cbc6, type: 3}
+  m_Name: GrassData
+  m_EditorClassIdentifier: Assembly-CSharp::FloorData
+  <material>k__BackingField: {fileID: 2100000, guid: d40bcee3499068d408b81f07b871bb09, type: 2}
   <floorType>k__BackingField: 3
