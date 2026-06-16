@@ -26,10 +26,10 @@ public class PillarMath : MonoBehaviour
         return totalArea;
     }
 
-    private 
+    // private 
 
-    public void CalculatePillar1()
-    {
-        StaticFormulas.P1Water();
-    }
+    //public void CalculatePillar1()
+    //{
+    //    StaticFormulas.P1Water();
+    //}
 }
