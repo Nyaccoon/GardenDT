@@ -16,11 +16,23 @@ public class PillarMath : MonoBehaviour
     private int nrOfTree;
     private int totalArea;
 
+    private int allPlants;
+
     public void Start()
+    {
+        Setup();
+    }
+
+    private void Setup()
     {
         allBuildings = bSystem.GetAllBuildings();
         allFloors = bSystem.GetAllFloors();
+    }
+
+    public void CalculatePillar1()
+    {
         GetAllNumbers();
+        StaticFormulas.P1Water(GetTotalArea(), nrOfPaved, nrOfLeakThrough, nrOfUnpaved, nrOfFlower, nrOfGrass, nrOfBush, nrOfTree);
     }
 
     private int GetTotalArea()
@@ -30,13 +42,25 @@ public class PillarMath : MonoBehaviour
         return totalArea;
     }
 
-    public void CalculatePillar1()
+    private void GetAllPlants()
     {
-        StaticFormulas.P1Water(GetTotalArea(), nrOfPaved, nrOfLeakThrough, nrOfUnpaved, nrOfFlower, nrOfGrass, nrOfBush, nrOfTree);
+        List<FloorBuilding> allFloorsCopy = GetCopyAllFloors();
+    }
+
+    private List<FloorBuilding> GetCopyAllFloors()
+    {
+        List<FloorBuilding> builings = new();
+        foreach (FloorBuilding b in allFloors)
+        {
+            builings.Add(b);
+        }
+
+        return builings;
     }
 
     private void GetAllNumbers()
     {
+        Setup();
         foreach (Building building in allBuildings)
         {
             if (building.GetData().floorType == Support.FloorType.Paved)
