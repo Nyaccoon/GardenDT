@@ -45,6 +45,17 @@ public class PillarMath : MonoBehaviour
     private void GetAllPlants()
     {
         List<FloorBuilding> allFloorsCopy = GetCopyAllFloors();
+
+        foreach (Building building in allBuildings)
+        {
+            foreach (FloorBuilding floor in allFloors)
+            {
+                if ((building.transform.position - new Vector3(0, 0.5f, 0)) == floor.transform.position)
+                {
+                    allFloorsCopy.Remove(floor);
+                }
+            }
+        }
     }
 
     private List<FloorBuilding> GetCopyAllFloors()
