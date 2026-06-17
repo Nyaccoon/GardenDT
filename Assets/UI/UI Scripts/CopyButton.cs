@@ -41,6 +41,7 @@ public class CopyButton : MonoBehaviour
         te.text = JsonConvert.SerializeObject(Wrapper.data, Formatting.Indented);
         te.SelectAll();
         te.Copy();
+        
     }
     // Update is called once per frame
     void Update()
