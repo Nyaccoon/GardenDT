@@ -7,11 +7,10 @@ using Newtonsoft.Json;
 
 public class CopyButton : MonoBehaviour
 {
-    [SerializeField]
-    private BuildingSystem _buildings; 
+    [SerializeField] private BuildingSystem _buildings; 
+    [SerializeField] private FloorBuilding _floor;
     private Button _copyButton;
-    [SerializeField]
-    private UIDocument _document;
+    [SerializeField] private UIDocument _document;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,6 +28,13 @@ public class CopyButton : MonoBehaviour
             print("object");
             ObjectDTO buildDTO = new ObjectDTO(building.transform.position, building.data.name);
             Wrapper.data.objects.Add(buildDTO);
+        }
+
+        foreach (var tile in _floor.Tiles )
+        {
+            print("tile");
+            ObjectDTO tileDTO = new ObjectDTO(tile.transform.position, tile.gameObject.name);
+            Wrapper.data.tiles.Add(tileDTO);
         }
         print("Copied");
         TextEditor te = new TextEditor();
