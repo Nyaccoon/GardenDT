@@ -15,7 +15,7 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private Building buildingPrefab;
     [SerializeField] private BuildingGrid grid;
     private BuildingPreview preview;
-
+ 
     private List<Building> allBuildings = new();
 
     private void Update()
@@ -118,4 +118,39 @@ public class BuildingSystem : MonoBehaviour
     {
         return allBuildings;
     }
+
+    public void SpawnTree()
+    {
+        Vector3 mousePos = GetWorldMousePosition();
+
+        preview = CreatePreview(treeData, mousePos);
+    }
+
+    public void SpawnBush()
+    {
+        Vector3 mousePos = GetWorldMousePosition();
+
+        preview = CreatePreview(bushData, mousePos);
+    }
+
+    public void SpawnVegGar()
+    {
+        Vector3 mousePos = GetWorldMousePosition();
+
+        preview = CreatePreview(vegGarData, mousePos);
+    }
+
+    public void SpawnFlower()
+    {
+        Vector3 mousePos = GetWorldMousePosition();
+
+        preview = CreatePreview(flowerData, mousePos);
+    }
+    public void SpawnTramp()
+    {
+        Vector3 mousePos = GetWorldMousePosition();
+
+        preview = CreatePreview(trampData, mousePos);
+    }
+
 }
