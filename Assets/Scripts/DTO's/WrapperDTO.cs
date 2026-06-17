@@ -2,7 +2,7 @@
     using System.Collections.Generic;
     using UnityEditor;
 
-    public static class WrapperDTO
+    public class WrapperDTO
     {
-        public static List<ObjectDTO> objects = new();
+        public List<ObjectDTO> objects = new();
     }

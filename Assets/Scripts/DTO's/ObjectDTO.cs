@@ -1,13 +1,26 @@
 using UnityEngine;
 
+public struct vec3
+{
+   public vec3(float x, float y, float z)
+   {
+      this.x = x;
+       this.y = y;
+       this.z = z;
+   }
+   public float x;
+   public float y;
+   public float z;
+}
 public class ObjectDTO 
 {
-   ObjectDTO(Vector3 pos, int typeIndex)
+   public ObjectDTO(Vector3 pos, string typeName)
    {
-      position = pos;
-      type = typeIndex;
+      position = new vec3(pos.x, pos.y, pos.z);
+            
+      type = typeName;
    }
    
-   public int type { get; set; }
-   public Vector3 position { get; set; }
+   public string type { get; set; }
+   public vec3 position { get; set; }
 }

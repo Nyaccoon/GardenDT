@@ -2,9 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.UIToolkit;
 using UnityEngine.UIElements;
+using Newtonsoft.Json;
+
 
 public class CopyButton : MonoBehaviour
 {
+    [SerializeField]
+    private BuildingSystem _buildings; 
     private Button _copyButton;
     [SerializeField]
     private UIDocument _document;
@@ -18,16 +22,17 @@ public class CopyButton : MonoBehaviour
 
     private void copyClick()
     {
-        WrapperDTO.objects.Clear();
-        List<Building> buildings = new();
-        buildings.AddRange(GetComponents<Building>());
-        foreach (Building building in buildings)
+        Wrapper.data.objects.Clear();
+        
+        foreach (var building in _buildings.GetAllBuildings())
         {
-            //ObjectDTO buildDTO = new ObjectDTO(building.transform.position);
+            print("object");
+            ObjectDTO buildDTO = new ObjectDTO(building.transform.position, building.data.name);
+            Wrapper.data.objects.Add(buildDTO);
         }
         print("Copied");
         TextEditor te = new TextEditor();
-        te.text = "sometimes it's like i can still hear her\ngay gay homosexual, gay!";
+        te.text = JsonConvert.SerializeObject(Wrapper.data, Formatting.Indented);
         te.SelectAll();
         te.Copy();
     }
