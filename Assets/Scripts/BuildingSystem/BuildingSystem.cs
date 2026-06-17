@@ -14,7 +14,7 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private BuildingPreview previewPrefab;
     [SerializeField] private Building buildingPrefab;
     [SerializeField] private BuildingGrid grid;
-    private BuildingPreview preview;
+    public BuildingPreview preview;
 
     private List<Building> allBuildings = new();
 
@@ -51,7 +51,7 @@ public class BuildingSystem : MonoBehaviour
         }
     }
 
-    private void HandlePreview(Vector3 mouseWorldPos)
+    public void HandlePreview(Vector3 mouseWorldPos, bool forceBuild = false)
     {
         preview.transform.position = mouseWorldPos;
         List<Vector3> buildPositions = preview.model.GetAllBuildingPositions();
@@ -60,7 +60,7 @@ public class BuildingSystem : MonoBehaviour
         {
             preview.transform.position = GetSnappedCentrePosition(buildPositions);
             preview.ChangeState(Support.PreviewState.Positive);
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || forceBuild)
             {
                 PlaceBuilding(buildPositions);
             }
@@ -107,7 +107,7 @@ public class BuildingSystem : MonoBehaviour
         return Vector3.zero;
     }
 
-    private BuildingPreview CreatePreview(BuildingData data, Vector3 position)
+    public BuildingPreview CreatePreview(BuildingData data, Vector3 position)
     {
         BuildingPreview buildingPreview = Instantiate(previewPrefab, position, Quaternion.identity);
         buildingPreview.Setup(data);
