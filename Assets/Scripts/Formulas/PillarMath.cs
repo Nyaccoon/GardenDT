@@ -5,6 +5,8 @@ public class PillarMath : MonoBehaviour
 {
     private BuildingSystem bSystem;
     private List<Building> allBuildings = new();
+    private List<FloorBuilding> allFloors = new();
+
     private int nrOfPaved;
     private int nrOfLeakThrough;
     private int nrOfUnpaved;
@@ -17,6 +19,7 @@ public class PillarMath : MonoBehaviour
     public void Start()
     {
         allBuildings = bSystem.GetAllBuildings();
+        allFloors = bSystem.GetAllFloors();
         GetAllNumbers();
     }
 
@@ -34,9 +37,9 @@ public class PillarMath : MonoBehaviour
 
     private void GetAllNumbers()
     {
-        foreach(Building building in allBuildings)
+        foreach (Building building in allBuildings)
         {
-            if(building.GetData().floorType == Support.FloorType.Paved)
+            if (building.GetData().floorType == Support.FloorType.Paved)
             {
                 nrOfPaved++;
             }
@@ -65,5 +68,39 @@ public class PillarMath : MonoBehaviour
                 nrOfTree++;
             }
         }
+
+        foreach (FloorBuilding floorBuilding in allFloors)
+        {
+            if (floorBuilding.GetData().floorType == Support.FloorType.Paved)
+            {
+                nrOfPaved++;
+            }
+            else if (floorBuilding.GetData().floorType == Support.FloorType.LeakThrough)
+            {
+                nrOfLeakThrough++;
+            }
+            else if (floorBuilding.GetData().floorType == Support.FloorType.Unpaved)
+            {
+                nrOfUnpaved++;
+            }
+            else if (floorBuilding.GetData().floorType == Support.FloorType.Grass)
+            {
+                nrOfGrass++;
+            }
+            else if (floorBuilding.GetData().floorType == Support.FloorType.Flower)
+            {
+                nrOfFlower++;
+            }
+            else if (floorBuilding.GetData().floorType == Support.FloorType.Bush)
+            {
+                nrOfBush++;
+            }
+            else if (floorBuilding.GetData().floorType == Support.FloorType.Tree)
+            {
+                nrOfTree++;
+            }
+        }
+
+        Debug.Log("All numbers (paved, leak through, unpaved, grass, flower, bush, tree " + nrOfPaved + ", " + nrOfLeakThrough + ", " + nrOfUnpaved + ", " + nrOfGrass + ", " + nrOfFlower + ", " + nrOfBush + ", " + nrOfTree);
     }
 }

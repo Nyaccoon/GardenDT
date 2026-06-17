@@ -24,7 +24,7 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private Building buildingPrefab;
     [SerializeField] private FloorBuilding floorBuildingPrefab;
     [SerializeField] private BuildingGrid grid;
-    [SerializeField] private Transform standardFloor;
+    [SerializeField] private FloorBuilding standardFloor;
 
     private BuildingPreview buildingPreview;
     private BuildingPreview floorPreview;
@@ -157,8 +157,9 @@ public class BuildingSystem : MonoBehaviour
         {
             var hitTransform = hit.transform;
             int count = 0;
-            while (hitTransform != null && hitTransform.gameObject.GetComponent<BuildingModel>() == null && count < 10)
+            while (hitTransform != null && hitTransform.gameObject.GetComponent<FloorBuilding>() == null && count < 10)
             {
+                Debug.Log(hitTransform);
                 hitTransform = hitTransform.parent;
                 count++;
             }
@@ -189,10 +190,15 @@ public class BuildingSystem : MonoBehaviour
         {
             for (int y = 0; y < Support.GridHeight; y++)
             {
-                var newObject = Instantiate(standardFloor, new Vector3(x * BuildingSystem.cellSize + 0.5f, -0.5f, y * BuildingSystem.cellSize + 0.5f), Quaternion.identity);
-                newObject.SetParent(transform);
+                FloorBuilding newObject = Instantiate(standardFloor, new Vector3(x * BuildingSystem.cellSize + 0.5f, -0.5f, y * BuildingSystem.cellSize + 0.5f), Quaternion.identity);
+                newObject.transform.SetParent(transform);
+                newObject.Setup(grassData, 0f);
+
+                allFloors.Add(newObject);
             }
         }
+
+        Debug.Log(allFloors);
     }
 
     private Vector3 GetSnappedCentrePosition(List<Vector3> allBuildingPositions)
