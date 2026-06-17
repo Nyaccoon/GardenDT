@@ -11,7 +11,7 @@ public class Building : MonoBehaviour
     public void Setup(BuildingData data, float rotation)
     {
         this.data = data;
-        model = Instantiate(data.model, transform.position, Quaternion.identity, transform);
+        model = Instantiate(data.buildingModel, transform.position, Quaternion.identity, transform);
         model.Rotate(rotation);
     }
 
