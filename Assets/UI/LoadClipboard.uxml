@@ -1,8 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement style="flex-grow: 1; align-items: center; justify-content: center;">
         <ui:GroupBox style="width: 30%; height: 40%; background-color: rgb(212, 212, 212); justify-content: space-around; align-items: center;">
-            <ui:Label text="Make sure that your save file&apos;s content&#10;is the most recent thing copied to&#10;clipboard" style="font-size: 12px;"/>
             <ui:Label text="Load in data from your clipboard&#10;"/>
+            <ui:Label text="Make sure that your save file&apos;s content&#10;is the most recent thing copied to&#10;clipboard" style="font-size: 12px;"/>
             <ui:Button text="Load save" name="LoadButton" style="background-color: rgb(247, 129, 79);"/>
         </ui:GroupBox>
     </ui:VisualElement>
