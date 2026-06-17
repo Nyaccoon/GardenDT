@@ -28,13 +28,32 @@ public class BuildingGrid : MonoBehaviour
         }
     }
 
-    public bool CanBuild(List<Vector3> allBuildingPositions)
+    public void SetFloor(FloorBuilding floorBuilding, List<Vector3> allBuildingPositions)
+    {
+        foreach (var p in allBuildingPositions)
+        {
+            (int x, int y) = WorldToGridPosition(p);
+            grid[x, y].SetFloor(floorBuilding);
+        }
+    }
+
+    public bool CanBuildBuilding(List<Vector3> allBuildingPositions)
     {
         foreach (var p in allBuildingPositions)
         {
             (int x, int y) = WorldToGridPosition(p);
             if (x < 0 || x >= width || y < 0 || y >= height) return false;
             if (!grid[x, y].IsEmpty()) return false;
+        }
+        return true;
+    }
+
+    public bool CanBuildFloor(List<Vector3> allBuildingPositions)
+    {
+        foreach (var p in allBuildingPositions)
+        {
+            (int x, int y) = WorldToGridPosition(p);
+            if (x < 0 || x >= width || y < 0 || y >= height) return false;
         }
         return true;
     }
@@ -70,9 +89,16 @@ public class BuildingGrid : MonoBehaviour
 public class BuildingGridCell
 {
     private Building building;
+    private FloorBuilding floorBuilding;
+
     public void SetBuilding(Building building)
     {
         this.building = building;
+    }
+    
+    public void SetFloor(FloorBuilding floorBuilding)
+    {
+        this.floorBuilding = floorBuilding;
     }
 
     public bool IsEmpty()

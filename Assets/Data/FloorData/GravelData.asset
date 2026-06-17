@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd775c75e48eba4cbed66116582cbc6, type: 3}
   m_Name: GravelData
   m_EditorClassIdentifier: Assembly-CSharp::FloorData
-  <material>k__BackingField: {fileID: 2100000, guid: 6d0809e0eb601bc498264b211f8d7eb7, type: 2}
+  <floorModel>k__BackingField: {fileID: 6424797548972435022, guid: 17a7a2c1f32fe664885b14f48b4e2565, type: 3}
   <floorType>k__BackingField: 1
