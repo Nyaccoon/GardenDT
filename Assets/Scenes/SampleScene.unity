@@ -553,7 +553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1486303079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,6 +664,7 @@ MonoBehaviour:
   previewPrefab: {fileID: 2948508113742318247, guid: 8b1fd86d70366d2428c541cbd9f17a8b, type: 3}
   buildingPrefab: {fileID: 4235606000567523324, guid: ffac01ea145474b4589c1db316f55af6, type: 3}
   grid: {fileID: 1727710357}
+  preview: {fileID: 0}
 --- !u!1001 &1703033531
 PrefabInstance:
   m_ObjectHideFlags: 0
