@@ -519,6 +519,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: copyCliboardWindow
       objectReference: {fileID: 0}
+    - target: {fileID: 6913073536627371926, guid: da3c50475933220639fabc9a3d616ca2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8253987857119719794, guid: da3c50475933220639fabc9a3d616ca2, type: 3}
+      propertyPath: _floor
+      value: 
+      objectReference: {fileID: 1949005913}
+    - target: {fileID: 8253987857119719794, guid: da3c50475933220639fabc9a3d616ca2, type: 3}
+      propertyPath: _buildings
+      value: 
+      objectReference: {fileID: 1491958051}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -707,6 +719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloorBuilding
   _cube: {fileID: 4418394487807398191, guid: 411140b186fced64bb1edfe65eef389b, type: 3}
+  Tiles: []
 --- !u!4 &1949005914
 Transform:
   m_ObjectHideFlags: 0
