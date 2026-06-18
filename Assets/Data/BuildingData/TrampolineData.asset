@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c970fcc75f6e8d547b29207d74d7c364, type: 3}
   m_Name: TrampolineData
   m_EditorClassIdentifier: Assembly-CSharp::BuildingData
-  <model>k__BackingField: {fileID: 2994909154511720989, guid: da3328d077008234e8f6d11476c81b2d, type: 3}
+  <buildingModel>k__BackingField: {fileID: 2994909154511720989, guid: da3328d077008234e8f6d11476c81b2d, type: 3}
   <floorType>k__BackingField: 2
