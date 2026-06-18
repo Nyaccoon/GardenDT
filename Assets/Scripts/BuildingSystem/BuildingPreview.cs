@@ -6,45 +6,62 @@ public class BuildingPreview : MonoBehaviour
     [SerializeField] private Material PositiveMaterial;
     [SerializeField] private Material NegativeMaterial;
 
-    public Support.PreviewState _state { get; private set; } = Support.PreviewState.Negative;
-    public BuildingData _data { get; private set; }
-    public BuildingModel model { get; private set; }
+    public Support.PreviewState previewState { get; private set; } = Support.PreviewState.Negative;
+    public BuildingData buildingData { get; private set; }
+    public FloorData floorData { get; private set; }
+    public BuildingModel buildingModel { get; private set; }
+
     private List<Renderer> renderers = new();
     private List<Collider> colliders = new();
 
     public void Setup(BuildingData data)
     {
-        _data = data;
-        model = Instantiate(data.model,transform.position,Quaternion.identity,transform);
-        renderers.AddRange(model.GetComponentsInChildren<Renderer>());
-        colliders.AddRange(model.GetComponentsInChildren<Collider>());
+        buildingData = data;
+        buildingModel = Instantiate(data.buildingModel, transform.position, Quaternion.identity, transform);
+        renderers.AddRange(buildingModel.GetComponentsInChildren<Renderer>());
+        colliders.AddRange(buildingModel.GetComponentsInChildren<Collider>());
 
-        foreach(var col in colliders)
+        foreach (var col in colliders)
         {
-            col.enabled= false;
+            col.enabled = false;
         }
-        SetPreviewMaterial(_state);
+        SetPreviewMaterial(previewState);
+    }
+
+    public void Setup(FloorData data)
+    {
+        floorData = data;
+        buildingModel = Instantiate(data.floorModel, transform.position, Quaternion.identity, transform);
+        buildingModel.transform.position -= new Vector3(0, 0.49f, 0);
+        renderers.AddRange(buildingModel.GetComponentsInChildren<Renderer>());
+        colliders.AddRange(buildingModel.GetComponentsInChildren<Collider>());
+
+        foreach (var col in colliders)
+        {
+            col.enabled = false;
+        }
+        SetPreviewMaterial(previewState);
     }
 
     public void ChangeState(Support.PreviewState state)
     {
-        if (state == _state) return;
-        _state = state;
-        SetPreviewMaterial(_state);
+        if (state == previewState) return;
+        previewState = state;
+        SetPreviewMaterial(previewState);
     }
 
     public void Rotate(int rotationStep)
     {
-        model.Rotate(rotationStep);
+        buildingModel.Rotate(rotationStep);
     }
 
     private void SetPreviewMaterial(Support.PreviewState state)
     {
         Material previewMat = state == Support.PreviewState.Positive ? PositiveMaterial : NegativeMaterial;
-        foreach(var rend in renderers)
+        foreach (var rend in renderers)
         {
             Material[] mats = new Material[rend.sharedMaterials.Length];
-            for(int i = 0; i < mats.Length; i++)
+            for (int i = 0; i < mats.Length; i++)
             {
                 mats[i] = previewMat;
             }
