@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd775c75e48eba4cbed66116582cbc6, type: 3}
   m_Name: GrassData
   m_EditorClassIdentifier: Assembly-CSharp::FloorData
-  <material>k__BackingField: {fileID: 2100000, guid: d40bcee3499068d408b81f07b871bb09, type: 2}
+  <floorModel>k__BackingField: {fileID: 8536522635300286262, guid: 411140b186fced64bb1edfe65eef389b, type: 3}
   <floorType>k__BackingField: 3

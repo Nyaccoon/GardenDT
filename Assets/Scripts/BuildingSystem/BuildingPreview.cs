@@ -17,13 +17,13 @@ public class BuildingPreview : MonoBehaviour
     public void Setup(BuildingData data)
     {
         buildingData = data;
-        buildingModel = Instantiate(data.buildingModel, transform.position, Quaternion.identity, transform);
+        buildingModel = Instantiate(data.buildingModel,transform.position,Quaternion.identity,transform);
         renderers.AddRange(buildingModel.GetComponentsInChildren<Renderer>());
         colliders.AddRange(buildingModel.GetComponentsInChildren<Collider>());
 
-        foreach (var col in colliders)
+        foreach(var col in colliders)
         {
-            col.enabled = false;
+            col.enabled= false;
         }
         SetPreviewMaterial(previewState);
     }
@@ -58,10 +58,10 @@ public class BuildingPreview : MonoBehaviour
     private void SetPreviewMaterial(Support.PreviewState state)
     {
         Material previewMat = state == Support.PreviewState.Positive ? PositiveMaterial : NegativeMaterial;
-        foreach (var rend in renderers)
+        foreach(var rend in renderers)
         {
             Material[] mats = new Material[rend.sharedMaterials.Length];
-            for (int i = 0; i < mats.Length; i++)
+            for(int i = 0; i < mats.Length; i++)
             {
                 mats[i] = previewMat;
             }

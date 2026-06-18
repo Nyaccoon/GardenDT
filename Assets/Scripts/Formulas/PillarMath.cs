@@ -4,7 +4,9 @@ using UnityEngine;
 public class PillarMath : MonoBehaviour
 {
     private BuildingSystem bSystem;
-    private List<Building> allBuildings;
+    private List<Building> allBuildings = new();
+    private List<FloorBuilding> allFloors = new();
+
     private int nrOfPaved;
     private int nrOfLeakThrough;
     private int nrOfUnpaved;
@@ -26,6 +28,11 @@ public class PillarMath : MonoBehaviour
     public int nrOfPlantTypes;
 
     public void Start()
+    {
+        Setup();
+    }
+
+    private void Setup()
     {
         allBuildings = bSystem.GetAllBuildings();
         allFloors = bSystem.GetAllFloors();

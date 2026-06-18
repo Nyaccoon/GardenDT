@@ -41,11 +41,11 @@ public class BuildingSystem : MonoBehaviour
     {
         Vector3 mousePos = GetWorldMousePosition();
 
-        if (buildingPreview != null)
+        if(buildingPreview != null)
         {
             HandleBuildingPreview(mousePos);
         }
-        else if (floorPreview != null)
+        else if(floorPreview != null)
         {
             HandleFloorPreview(mousePos);
         }
@@ -152,7 +152,7 @@ public class BuildingSystem : MonoBehaviour
     {
         GameObject hitObject = null;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if(Physics.Raycast(ray, out RaycastHit hit))
         {
             var hitTransform = hit.transform;
             int count = 0;
@@ -164,7 +164,7 @@ public class BuildingSystem : MonoBehaviour
             }
             hitObject = hitTransform?.gameObject;
         }
-        Debug.Log("Hit Object: " + hitObject.name);
+        Debug.Log("Hit Object: " +  hitObject.name);
         return hitObject;
     }
 
@@ -172,7 +172,7 @@ public class BuildingSystem : MonoBehaviour
     {
         GameObject objectToDestroy = GetHitObject();
         Debug.Log(objectToDestroy);
-        if (objectToDestroy != null)
+        if(objectToDestroy != null)
         {
             Destroy(objectToDestroy);
         }
@@ -213,7 +213,7 @@ public class BuildingSystem : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Plane groundPlane = new(Vector3.up, Vector3.zero);
-        if (groundPlane.Raycast(ray, out float distance))
+        if(groundPlane.Raycast(ray, out float distance))
         {
             return ray.GetPoint(distance);
         }
