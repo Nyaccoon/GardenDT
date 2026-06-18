@@ -11,55 +11,82 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private BuildingData flowerData;
     [SerializeField] private BuildingData vegGarData;
     [SerializeField] private BuildingData trampData;
+
+    [SerializeField] private FloorData dirtData;
+    [SerializeField] private FloorData grassData;
+    [SerializeField] private FloorData gravelData;
+    //[SerializeField] private FloorData leakThroughTileData;
+    //[SerializeField] private FloorData sandData;
+    //[SerializeField] private FloorData tileData;
+    //[SerializeField] private FloorData waterData;
+
     [SerializeField] private BuildingPreview previewPrefab;
     [SerializeField] private Building buildingPrefab;
+    [SerializeField] private FloorBuilding floorBuildingPrefab;
     [SerializeField] private BuildingGrid grid;
-    private BuildingPreview preview;
+    [SerializeField] private FloorBuilding standardFloor;
+
+    private BuildingPreview buildingPreview;
+    private BuildingPreview floorPreview;
 
     private List<Building> allBuildings = new();
+    private List<FloorBuilding> allFloors = new();
+
+    private void Start()
+    {
+        InstantiateFloor();
+    }
 
     private void Update()
     {
         Vector3 mousePos = GetWorldMousePosition();
 
-        if(preview != null)
+        if (buildingPreview != null)
         {
-            HandlePreview(mousePos);
+            HandleBuildingPreview(mousePos);
+        }
+        else if (floorPreview != null)
+        {
+            HandleFloorPreview(mousePos);
         }
         else
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                preview = CreatePreview(treeData, mousePos);
+                buildingPreview = CreateBuildingPreview(treeData, mousePos);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                preview = CreatePreview(bushData, mousePos);
+                buildingPreview = CreateBuildingPreview(bushData, mousePos);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                preview = CreatePreview(flowerData, mousePos);
+                buildingPreview = CreateBuildingPreview(flowerData, mousePos);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                preview = CreatePreview(vegGarData, mousePos);
+                buildingPreview = CreateBuildingPreview(vegGarData, mousePos);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha5))
             {
-                preview = CreatePreview(trampData, mousePos);
+                buildingPreview = CreateBuildingPreview(trampData, mousePos);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha9))
+            {
+                floorPreview = CreateFloorPreview(dirtData, mousePos);
             }
         }
     }
 
-    private void HandlePreview(Vector3 mouseWorldPos)
+    private void HandleBuildingPreview(Vector3 mouseWorldPos)
     {
-        preview.transform.position = mouseWorldPos;
-        List<Vector3> buildPositions = preview.model.GetAllBuildingPositions();
-        bool canBuild = grid.CanBuild(buildPositions);
+        buildingPreview.transform.position = mouseWorldPos;
+        List<Vector3> buildPositions = buildingPreview.buildingModel.GetAllBuildingPositions();
+        bool canBuild = grid.CanBuildBuilding(buildPositions);
         if (canBuild)
         {
-            preview.transform.position = GetSnappedCentrePosition(buildPositions);
-            preview.ChangeState(Support.PreviewState.Positive);
+            buildingPreview.transform.position = GetSnappedCentrePosition(buildPositions);
+            buildingPreview.ChangeState(Support.PreviewState.Positive);
             if (Input.GetMouseButtonDown(0))
             {
                 PlaceBuilding(buildPositions);
@@ -67,12 +94,32 @@ public class BuildingSystem : MonoBehaviour
         }
         else
         {
-            preview.ChangeState(Support.PreviewState.Negative);
+            buildingPreview.ChangeState(Support.PreviewState.Negative);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            preview.Rotate(90);
+            buildingPreview.Rotate(90);
+        }
+    }
+
+    private void HandleFloorPreview(Vector3 mouseWorldPos)
+    {
+        floorPreview.transform.position = mouseWorldPos;
+        List<Vector3> buildPositions = floorPreview.buildingModel.GetAllBuildingPositions();
+        bool canBuild = grid.CanBuildFloor(buildPositions);
+        if (canBuild)
+        {
+            floorPreview.transform.position = GetSnappedCentrePosition(buildPositions);
+            floorPreview.ChangeState(Support.PreviewState.Positive);
+            if (Input.GetMouseButtonDown(0))
+            {
+                PlaceFloor(buildPositions);
+            }
+        }
+        else
+        {
+            floorPreview.ChangeState(Support.PreviewState.Negative);
         }
     }
 
@@ -81,10 +128,76 @@ public class BuildingSystem : MonoBehaviour
         Building building = Instantiate(buildingPrefab, buildingPreview.transform.position, Quaternion.identity);
         building.Setup(buildingPreview.buildingData, buildingPreview.buildingModel.rotation);
         grid.SetBuilding(building, buildingPositions);
-        Destroy(preview.gameObject);
-        preview = null;
+        Destroy(buildingPreview.gameObject);
+        buildingPreview = null;
 
         allBuildings.Add(building);
+    }
+
+    private void PlaceFloor(List<Vector3> buildingPositions)
+    {
+        DestroyObject();
+
+        FloorBuilding floorBuilding = Instantiate(floorBuildingPrefab, floorPreview.transform.position, Quaternion.identity);
+        floorBuilding.Setup(floorPreview.floorData, floorPreview.buildingModel.rotation);
+        floorBuilding.transform.position -= new Vector3(0, 0.5f, 0);
+        grid.SetFloor(floorBuilding, buildingPositions);
+        Destroy(floorPreview.gameObject);
+        floorPreview = null;
+
+        allFloors.Add(floorBuilding);
+    }
+
+    private GameObject GetHitObject()
+    {
+        GameObject hitObject = null;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            var hitTransform = hit.transform;
+            int count = 0;
+            while (hitTransform != null && hitTransform.gameObject.GetComponent<FloorBuilding>() == null && count < 10)
+            {
+                Debug.Log(hitTransform);
+                hitTransform = hitTransform.parent;
+                count++;
+            }
+            hitObject = hitTransform?.gameObject;
+        }
+        Debug.Log("Hit Object: " + hitObject.name);
+        return hitObject;
+    }
+
+    private void DestroyObject()
+    {
+        GameObject objectToDestroy = GetHitObject();
+        Debug.Log(objectToDestroy);
+        if (objectToDestroy != null)
+        {
+            Destroy(objectToDestroy);
+        }
+        else
+        {
+            Debug.Log("No object to destroy");
+        }
+    }
+
+
+    private void InstantiateFloor()
+    {
+        for (int x = 0; x < Support.GridWidth; x++)
+        {
+            for (int y = 0; y < Support.GridHeight; y++)
+            {
+                FloorBuilding newObject = Instantiate(standardFloor, new Vector3(x * BuildingSystem.cellSize + 0.5f, -0.5f, y * BuildingSystem.cellSize + 0.5f), Quaternion.identity);
+                newObject.transform.SetParent(transform);
+                newObject.Setup(grassData, 0f);
+
+                allFloors.Add(newObject);
+            }
+        }
+
+        Debug.Log(allFloors);
     }
 
     private Vector3 GetSnappedCentrePosition(List<Vector3> allBuildingPositions)
@@ -100,22 +213,33 @@ public class BuildingSystem : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Plane groundPlane = new(Vector3.up, Vector3.zero);
-        if(groundPlane.Raycast(ray, out float distance))
+        if (groundPlane.Raycast(ray, out float distance))
         {
             return ray.GetPoint(distance);
         }
         return Vector3.zero;
     }
 
-    private BuildingPreview CreatePreview(BuildingData data, Vector3 position)
+    private BuildingPreview CreateBuildingPreview(BuildingData data, Vector3 position)
     {
         BuildingPreview buildingPreview = Instantiate(previewPrefab, position, Quaternion.identity);
         buildingPreview.Setup(data);
         return buildingPreview;
     }
+    private BuildingPreview CreateFloorPreview(FloorData data, Vector3 position)
+    {
+        BuildingPreview floorPreview = Instantiate(previewPrefab, position, Quaternion.identity);
+        floorPreview.Setup(data);
+        return floorPreview;
+    }
 
     public List<Building> GetAllBuildings()
     {
         return allBuildings;
+    }
+
+    public List<FloorBuilding> GetAllFloors()
+    {
+        return allFloors;
     }
 }
