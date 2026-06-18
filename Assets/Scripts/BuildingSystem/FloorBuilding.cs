@@ -1,20 +1,20 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FloorBuilding : MonoBehaviour
 {
-    private int width = Support.GridWidth;
-    private int height = Support.GridHeight;
-    [SerializeField] private Transform _cube;
-
-    public void Start()
+    private BuildingModel model;
+    private FloorData data;
+    public void Setup(FloorData data, float rotation)
     {
-        for(int x = 0; x < width; x++)
-        {
-            for(int y = 0; y < height; y++)
-            {
-                var newObject = Instantiate(_cube, new Vector3(x * BuildingSystem.cellSize + 0.5f, -0.5f, y * BuildingSystem.cellSize + 0.5f), Quaternion.identity);
-                newObject.SetParent(transform);
-            }
-        }
+        this.data = data;
+        model = Instantiate(data.floorModel, transform.position, Quaternion.identity, transform);
+        model.Rotate(rotation);
     }
-} 
+
+    public FloorData GetData()
+    {
+        return data;
+    }
+}
