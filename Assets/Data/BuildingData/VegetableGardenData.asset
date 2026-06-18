@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c970fcc75f6e8d547b29207d74d7c364, type: 3}
   m_Name: VegetableGardenData
   m_EditorClassIdentifier: Assembly-CSharp::BuildingData
-  <model>k__BackingField: {fileID: 4518179625404043015, guid: 505478d0be42d464e8738cf21e97cc12, type: 3}
+  <buildingModel>k__BackingField: {fileID: 4518179625404043015, guid: 505478d0be42d464e8738cf21e97cc12, type: 3}
   <floorType>k__BackingField: 4

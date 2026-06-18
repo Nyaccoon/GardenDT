@@ -242,36 +242,41 @@ public class BuildingSystem : MonoBehaviour
     public void SpawnTree()
     {
         Vector3 mousePos = GetWorldMousePosition();
-
-        preview = CreatePreview(treeData, mousePos);
+        buildingPreview = CreateBuildingPreview(treeData, mousePos);
     }
 
     public void SpawnBush()
     {
         Vector3 mousePos = GetWorldMousePosition();
-
-        preview = CreatePreview(bushData, mousePos);
+        buildingPreview = CreateBuildingPreview(bushData, mousePos);
     }
 
     public void SpawnVegGar()
     {
         Vector3 mousePos = GetWorldMousePosition();
-
-        preview = CreatePreview(vegGarData, mousePos);
+        buildingPreview = CreateBuildingPreview(vegGarData, mousePos);
     }
 
     public void SpawnFlower()
     {
         Vector3 mousePos = GetWorldMousePosition();
-
-        preview = CreatePreview(flowerData, mousePos);
+        buildingPreview = CreateBuildingPreview(flowerData, mousePos);
     }
+
     public void SpawnTramp()
     {
         Vector3 mousePos = GetWorldMousePosition();
-
-        preview = CreatePreview(trampData, mousePos);
+        buildingPreview = CreateBuildingPreview(trampData, mousePos);
     }
+
+    public void SpawnFloor()
+    {
+        Vector3 mousePos = GetWorldMousePosition();
+        floorPreview = CreateFloorPreview(dirtData, mousePos);
+    }
+
+
+
 
     public List<FloorBuilding> GetAllFloors()
     {

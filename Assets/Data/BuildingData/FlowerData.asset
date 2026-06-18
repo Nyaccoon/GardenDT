@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c970fcc75f6e8d547b29207d74d7c364, type: 3}
   m_Name: FlowerData
   m_EditorClassIdentifier: Assembly-CSharp::BuildingData
-  <model>k__BackingField: {fileID: 1156472254112320412, guid: b053c3e20198c6448aa9d70cdf754119, type: 3}
+  <buildingModel>k__BackingField: {fileID: 1156472254112320412, guid: b053c3e20198c6448aa9d70cdf754119, type: 3}
   <floorType>k__BackingField: 4
