@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd775c75e48eba4cbed66116582cbc6, type: 3}
   m_Name: DirtData
   m_EditorClassIdentifier: Assembly-CSharp::FloorData
-  <floorModel>k__BackingField: {fileID: 249923891369431325, guid: 9d11aead934525e439e721be4944aa2d, type: 3}
+  <material>k__BackingField: {fileID: 2100000, guid: e9c0ad0bcb3ec2443a302b6b18b861cf, type: 2}
   <floorType>k__BackingField: 2
