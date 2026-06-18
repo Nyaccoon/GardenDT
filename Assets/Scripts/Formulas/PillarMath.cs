@@ -16,16 +16,16 @@ public class PillarMath : MonoBehaviour
     private int nrOfTree;
     private int totalArea;
 
-    private fertilizerCleanupType fertilizer;
-    private fertilizerCleanupType cleanupStyle;
+    public fertilizerCleanupType fertilizer;
+    public fertilizerCleanupType cleanupStyle;
 
-    private int nrOfInsects;
-    private int nrOfBirds;
-    private int nrOfSpiders;
-    private int nrOfOtherAnimals;
+    public int nrOfInsects;
+    public int nrOfBirds;
+    public int nrOfSpiders;
+    public int nrOfOtherAnimals;
     private int totalPlants;
 
-    private int nrOfPlantTypes;
+    public int nrOfPlantTypes;
 
     public void Start()
     {
