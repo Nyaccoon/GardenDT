@@ -16,7 +16,16 @@ public class PillarMath : MonoBehaviour
     private int nrOfTree;
     private int totalArea;
 
-    private int allPlants;
+    private fertilizerCleanupType fertilizer;
+    private fertilizerCleanupType cleanupStyle;
+
+    private int nrOfInsects;
+    private int nrOfBirds;
+    private int nrOfSpiders;
+    private int nrOfOtherAnimals;
+    private int totalPlants;
+
+    private int nrOfPlantTypes;
 
     public void Start()
     {
@@ -27,12 +36,31 @@ public class PillarMath : MonoBehaviour
     {
         allBuildings = bSystem.GetAllBuildings();
         allFloors = bSystem.GetAllFloors();
+
+        List<FloorBuilding> allFloorsCopy = FilterGrassWithoutPlants();
+        allFloors = allFloorsCopy;
+
+        GetAllNumbers(allBuildings, allFloors);
     }
 
     public void CalculatePillar1()
     {
-        GetAllNumbers();
         StaticFormulas.P1Water(GetTotalArea(), nrOfPaved, nrOfLeakThrough, nrOfUnpaved, nrOfFlower, nrOfGrass, nrOfBush, nrOfTree);
+    }
+
+    public void CalculatePillar2()
+    {
+        StaticFormulas.P2Soil(fertilizer, cleanupStyle);
+    }
+
+    public void CalculatePillar3()
+    {
+        StaticFormulas.P3Environment(nrOfInsects, nrOfBirds, nrOfSpiders, nrOfOtherAnimals, totalPlants, totalArea);
+    }
+
+    public void CalculatePillar4()
+    {
+        StaticFormulas.P4PlantDiversity(nrOfFlower, nrOfGrass, nrOfBush, nrOfTree, totalArea, nrOfPlantTypes);
     }
 
     private int GetTotalArea()
@@ -42,7 +70,7 @@ public class PillarMath : MonoBehaviour
         return totalArea;
     }
 
-    private void GetAllPlants()
+    private List<FloorBuilding> FilterGrassWithoutPlants()
     {
         List<FloorBuilding> allFloorsCopy = GetCopyAllFloors();
 
@@ -56,6 +84,8 @@ public class PillarMath : MonoBehaviour
                 }
             }
         }
+
+        return allFloorsCopy;
     }
 
     private List<FloorBuilding> GetCopyAllFloors()
@@ -69,9 +99,8 @@ public class PillarMath : MonoBehaviour
         return builings;
     }
 
-    private void GetAllNumbers()
+    private void GetAllNumbers(List<Building> allBuildings, List<FloorBuilding> allFloorsCopy)
     {
-        Setup();
         foreach (Building building in allBuildings)
         {
             if (building.GetData().floorType == Support.FloorType.Paved)
@@ -89,22 +118,26 @@ public class PillarMath : MonoBehaviour
             else if (building.GetData().floorType == Support.FloorType.Grass)
             {
                 nrOfGrass++;
+                totalPlants++;
             }
             else if (building.GetData().floorType == Support.FloorType.Flower)
             {
                 nrOfFlower++;
+                totalPlants++;
             }
             else if (building.GetData().floorType == Support.FloorType.Bush)
             {
                 nrOfBush++;
+                totalPlants++;
             }
             else if (building.GetData().floorType == Support.FloorType.Tree)
             {
                 nrOfTree++;
+                totalPlants++;
             }
         }
 
-        foreach (FloorBuilding floorBuilding in allFloors)
+        foreach (FloorBuilding floorBuilding in allFloorsCopy)
         {
             if (floorBuilding.GetData().floorType == Support.FloorType.Paved)
             {
@@ -121,6 +154,7 @@ public class PillarMath : MonoBehaviour
             else if (floorBuilding.GetData().floorType == Support.FloorType.Grass)
             {
                 nrOfGrass++;
+                totalPlants++;
             }
             else if (floorBuilding.GetData().floorType == Support.FloorType.Flower)
             {
@@ -135,7 +169,6 @@ public class PillarMath : MonoBehaviour
                 nrOfTree++;
             }
         }
-
         Debug.Log("All numbers (paved, leak through, unpaved, grass, flower, bush, tree " + nrOfPaved + ", " + nrOfLeakThrough + ", " + nrOfUnpaved + ", " + nrOfGrass + ", " + nrOfFlower + ", " + nrOfBush + ", " + nrOfTree);
     }
 }

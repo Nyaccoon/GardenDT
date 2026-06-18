@@ -127,7 +127,6 @@ public class BuildingSystem : MonoBehaviour
     {
         Building building = Instantiate(buildingPrefab, buildingPreview.transform.position, Quaternion.identity);
         building.Setup(buildingPreview.buildingData, buildingPreview.buildingModel.rotation);
-        building.transform.position -= new Vector3(0, 0.5f, 0);
         grid.SetBuilding(building, buildingPositions);
         Destroy(buildingPreview.gameObject);
         buildingPreview = null;
