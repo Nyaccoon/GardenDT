@@ -78,8 +78,8 @@ public class BuildingSystem : MonoBehaviour
 
     private void PlaceBuilding(List<Vector3> buildingPositions)
     {
-        Building building = Instantiate(buildingPrefab, preview.transform.position, Quaternion.identity);
-        building.Setup(preview._data, preview.model.rotation);
+        Building building = Instantiate(buildingPrefab, buildingPreview.transform.position, Quaternion.identity);
+        building.Setup(buildingPreview.buildingData, buildingPreview.buildingModel.rotation);
         grid.SetBuilding(building, buildingPositions);
         Destroy(preview.gameObject);
         preview = null;
