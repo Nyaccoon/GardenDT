@@ -242,4 +242,59 @@ public class BuildingSystem : MonoBehaviour
     {
         return allFloors;
     }
+
+    private void ClearCurrentPreview()
+    {
+        if (buildingPreview != null)
+        {
+            HandleBuildingPreview(GetWorldMousePosition());
+        }
+        else if (floorPreview != null)
+        {
+            HandleFloorPreview(GetWorldMousePosition());
+        }
+    }
+
+    private void SpawnBuilding(BuildingData data)
+    {
+        Vector3 mousePos = GetWorldMousePosition();
+
+        ClearCurrentPreview();
+
+        buildingPreview = CreateBuildingPreview(data, mousePos);
+    }
+
+    public void SpawnTree()
+    {
+        SpawnBuilding(treeData);
+    }
+
+    public void SpawnBushe()
+    {
+        SpawnBuilding(bushData);
+    }
+
+    public void SpawnFlower()
+    {
+        SpawnBuilding(flowerData);
+    }
+
+    public void SpawnVegatable()
+    {
+        SpawnBuilding(vegGarData);
+    }
+
+    public void SpawnTramp()
+    {
+        SpawnBuilding(trampData);
+    }
+
+    public void SpawnFloor()
+    {
+        Vector3 mousePos = GetWorldMousePosition();
+
+        ClearCurrentPreview();
+
+        floorPreview = CreateFloorPreview(dirtData, mousePos);
+    }
 }
