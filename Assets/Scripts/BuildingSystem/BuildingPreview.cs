@@ -50,11 +50,6 @@ public class BuildingPreview : MonoBehaviour
         SetPreviewMaterial(previewState);
     }
 
-    public void Rotate(int rotationStep)
-    {
-        buildingModel.Rotate(rotationStep);
-    }
-
     private void SetPreviewMaterial(Support.PreviewState state)
     {
         Material previewMat = state == Support.PreviewState.Positive ? PositiveMaterial : NegativeMaterial;

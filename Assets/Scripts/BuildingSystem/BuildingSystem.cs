@@ -28,6 +28,8 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private BuildingGrid grid;
     [SerializeField] private FloorBuilding standardFloor;
 
+    private BuildingModel model;
+
     private BuildingPreview buildingPreview;
     private BuildingPreview floorPreview;
 
@@ -81,6 +83,20 @@ public class BuildingSystem : MonoBehaviour
             {
                 floorPreview = CreateFloorPreview(dirtData, mousePos);
             }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                if(buildingPreview != null)
+                {
+                    Destroy(buildingPreview.gameObject);
+                    buildingPreview = null;
+                }
+                else if(floorPreview != null)
+                {
+                    Destroy(floorPreview.gameObject);
+                    floorPreview = null;
+                }
+            }
         }
     }
 
@@ -88,7 +104,6 @@ public class BuildingSystem : MonoBehaviour
     {
         buildingPreview.transform.position = mouseWorldPos;
         List<Vector3> buildPositions = buildingPreview.buildingModel.GetAllBuildingPositions();
-        List<Vector3> floorPositions = floorPreview.buildingModel.GetAllBuildingPositions();
 
         bool canBuild = grid.CanBuildBuilding(buildPositions);
         if (canBuild)
@@ -103,11 +118,6 @@ public class BuildingSystem : MonoBehaviour
         else
         {
             buildingPreview.ChangeState(Support.PreviewState.Negative);
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            buildingPreview.Rotate(90);
         }
     }
 
@@ -134,7 +144,7 @@ public class BuildingSystem : MonoBehaviour
     private void PlaceBuilding(List<Vector3> buildingPositions)
     {
         Building building = Instantiate(buildingPrefab, buildingPreview.transform.position, Quaternion.identity);
-        building.Setup(buildingPreview.buildingData, buildingPreview.buildingModel.rotation);
+        building.Setup(buildingPreview.buildingData);
         grid.SetBuilding(building, buildingPositions);
         Destroy(buildingPreview.gameObject);
         buildingPreview = null;
@@ -147,7 +157,7 @@ public class BuildingSystem : MonoBehaviour
         DestroyObject();
 
         FloorBuilding floorBuilding = Instantiate(floorBuildingPrefab, floorPreview.transform.position, Quaternion.identity);
-        floorBuilding.Setup(floorPreview.floorData, floorPreview.buildingModel.rotation);
+        floorBuilding.Setup(floorPreview.floorData);
         floorBuilding.transform.position -= new Vector3(0, 0.5f, 0);
         grid.SetFloor(floorBuilding, buildingPositions);
         Destroy(floorPreview.gameObject);
@@ -199,7 +209,7 @@ public class BuildingSystem : MonoBehaviour
             {
                 FloorBuilding newObject = Instantiate(standardFloor, new Vector3(x * BuildingSystem.cellSize + 0.5f, -0.5f, y * BuildingSystem.cellSize + 0.5f), Quaternion.identity);
                 newObject.transform.SetParent(transform);
-                newObject.Setup(grassData, 0f);
+                newObject.Setup(grassData);
 
                 allFloors.Add(newObject);
             }
