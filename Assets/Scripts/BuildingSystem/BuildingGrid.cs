@@ -6,6 +6,8 @@ public class BuildingGrid : MonoBehaviour
     private int width = Support.GridWidth;
     private int height = Support.GridHeight;
     private BuildingGridCell[,] grid;
+    private LineRenderer _lineRenderer;
+    [SerializeField] private float lineWidth = 0.1f;
     
     private void Start()
     {
@@ -65,24 +67,42 @@ public class BuildingGrid : MonoBehaviour
         return (x, y);
     }
 
-    void OnDrawGizmos()
+    private void DrawLine(Vector3[] pos, float width)
     {
+        GameObject newLine = new GameObject("Line");
+        _lineRenderer = newLine.AddComponent<LineRenderer>();
+        _lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        _lineRenderer.startWidth = width;
+        _lineRenderer.endWidth = width;
+        _lineRenderer.startColor = Color.lightGoldenRodYellow;
+        _lineRenderer.endColor = Color.lightGoldenRodYellow;
+        _lineRenderer.positionCount = pos.Length;
+        _lineRenderer.SetPositions(pos);
+        
+    }
+    public void DrawLineGrid()
+    {
+        
         Gizmos.color = Color.lightGoldenRodYellow;
         if (BuildingSystem.cellSize <= 0 || width <= 0 || height <= 0) return;
         Vector3 origin = transform.position;
         for(int y = 0; y <= height; y++)
         {
-            Vector3 start = origin + new Vector3(0, 0.01f, y * BuildingSystem.cellSize);
-            Vector3 end = origin + new Vector3(width * BuildingSystem.cellSize, 0.01f, y * BuildingSystem.cellSize);
-            Gizmos.DrawLine(start, end);
+            Vector3[] poses = new Vector3[2];
+            poses[0] = origin + new Vector3(0, 0.01f, y * BuildingSystem.cellSize);
+            poses[1] = origin + new Vector3(width * BuildingSystem.cellSize, 0.01f, y * BuildingSystem.cellSize);
+            DrawLine(poses, lineWidth);
+        
         }
 
         for (int x = 0; x <= width; x++)
         {
-            Vector3 start = origin + new Vector3(x * BuildingSystem.cellSize, 0.01f, 0);
-            Vector3 end = origin + new Vector3(x * BuildingSystem.cellSize, 0.01f, height * BuildingSystem.cellSize);
-            Gizmos.DrawLine(start, end);
+            Vector3[] poses = new Vector3[2];
+            poses[0] = origin + new Vector3(x * BuildingSystem.cellSize, 0.01f, 0);
+            poses[1] = origin + new Vector3(x * BuildingSystem.cellSize, 0.01f, height * BuildingSystem.cellSize);
+            DrawLine(poses, lineWidth);
         }
+        
     }
 }
 

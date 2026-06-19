@@ -199,6 +199,7 @@ public class BuildingSystem : MonoBehaviour
         }
 
         Debug.Log(allFloors);
+        grid.DrawLineGrid();
     }
 
     private Vector3 GetSnappedCentrePosition(List<Vector3> allBuildingPositions)
