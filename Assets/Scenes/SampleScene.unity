@@ -5607,6 +5607,11 @@ MonoBehaviour:
   dirtData: {fileID: 11400000, guid: ef052b2e7fe09ea4599c3fdba2f75f3f, type: 2}
   grassData: {fileID: 11400000, guid: 6ae3d92b2d7088241be1374edaea78de, type: 2}
   gravelData: {fileID: 11400000, guid: 07f3aab5726f24b4e84115251842d033, type: 2}
+  leakThroughTileData: {fileID: 11400000, guid: 2bec5d0598302de40b3345594ce8d3f9, type: 2}
+  sandData: {fileID: 11400000, guid: f07e20720725a0e4585c340eeaf4a0b8, type: 2}
+  tileData: {fileID: 11400000, guid: 293166d70229ed24490f51bd6c635ead, type: 2}
+  waterData: {fileID: 11400000, guid: f447b10262944704bb6f4f692a0a5dec, type: 2}
+  noBuildData: {fileID: 11400000, guid: 4e6bea4825ac17d43a4661c109f26bea, type: 2}
   previewPrefab: {fileID: 2948508113742318247, guid: 8b1fd86d70366d2428c541cbd9f17a8b, type: 3}
   buildingPrefab: {fileID: 4235606000567523324, guid: ffac01ea145474b4589c1db316f55af6, type: 3}
   floorBuildingPrefab: {fileID: 6277748477459651085, guid: 79ccb467ad9272c43acedf947ec0b740, type: 3}

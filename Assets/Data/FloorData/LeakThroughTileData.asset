@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd775c75e48eba4cbed66116582cbc6, type: 3}
   m_Name: LeakThroughTileData
   m_EditorClassIdentifier: Assembly-CSharp::FloorData
-  <material>k__BackingField: {fileID: 2100000, guid: 97573287f867c474db5acc629f4c2c4d, type: 2}
+  <floorModel>k__BackingField: {fileID: 746419547649141391, guid: 93c0450aa684e5a43b37c5cc5a4603e2, type: 3}
   <floorType>k__BackingField: 1

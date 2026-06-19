@@ -1,7 +1,5 @@
 using UnityEngine;
-using System;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 
 
@@ -15,11 +13,7 @@ public class BuildingModel : MonoBehaviour
     private void Awake()
     {
         shapeUnits = GetComponentsInChildren<BuildingShapeUnit>();
-    }
-
-    public void Rotate(float rotationStep)
-    {
-        wrapper.Rotate(new(0, rotationStep, 0));
+        print(shapeUnits.Last().name);
     }
 
     public List<Vector3> GetAllBuildingPositions()

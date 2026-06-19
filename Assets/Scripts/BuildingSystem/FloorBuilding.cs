@@ -5,11 +5,10 @@ public class FloorBuilding : MonoBehaviour
 {
     private BuildingModel model;
     private FloorData data;
-    public void Setup(FloorData data, float rotation)
+    public void Setup(FloorData data)
     {
         this.data = data;
         model = Instantiate(data.floorModel, transform.position, Quaternion.identity, transform);
-        model.Rotate(rotation);
     }
 
     public FloorData GetData()

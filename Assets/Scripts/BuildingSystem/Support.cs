@@ -13,7 +13,8 @@ public static class Support
         Grass,
         Flower,
         Bush,
-        Tree
+        Tree,
+        NoBuild
     }
 
     public enum PreviewState

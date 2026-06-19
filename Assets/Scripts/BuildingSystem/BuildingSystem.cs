@@ -16,16 +16,19 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private FloorData dirtData;
     [SerializeField] private FloorData grassData;
     [SerializeField] private FloorData gravelData;
-    //[SerializeField] private FloorData leakThroughTileData;
-    //[SerializeField] private FloorData sandData;
-    //[SerializeField] private FloorData tileData;
-    //[SerializeField] private FloorData waterData;
+    [SerializeField] private FloorData leakThroughTileData;
+    [SerializeField] private FloorData sandData;
+    [SerializeField] private FloorData tileData;
+    [SerializeField] private FloorData waterData;
+    [SerializeField] private FloorData noBuildData;
 
     [SerializeField] private BuildingPreview previewPrefab;
     [SerializeField] private Building buildingPrefab;
     [SerializeField] private FloorBuilding floorBuildingPrefab;
     [SerializeField] private BuildingGrid grid;
     [SerializeField] private FloorBuilding standardFloor;
+
+    private List<BuildingShapeUnit> shapeUnits = new();
 
     private BuildingPreview buildingPreview;
     private BuildingPreview floorPreview;
@@ -72,6 +75,10 @@ public class BuildingSystem : MonoBehaviour
             {
                 buildingPreview = CreateBuildingPreview(trampData, mousePos);
             }
+            else if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                floorPreview = CreateFloorPreview(noBuildData, mousePos);
+            }
             else if (Input.GetKeyDown(KeyCode.Alpha9))
             {
                 floorPreview = CreateFloorPreview(dirtData, mousePos);
@@ -83,6 +90,7 @@ public class BuildingSystem : MonoBehaviour
     {
         buildingPreview.transform.position = mouseWorldPos;
         List<Vector3> buildPositions = buildingPreview.buildingModel.GetAllBuildingPositions();
+
         bool canBuild = grid.CanBuildBuilding(buildPositions);
         if (canBuild)
         {
@@ -90,6 +98,10 @@ public class BuildingSystem : MonoBehaviour
             buildingPreview.ChangeState(Support.PreviewState.Positive);
             if (Input.GetMouseButtonDown(0))
             {
+                foreach(var vec in buildPositions)
+                {
+                    print("building position" + vec);
+                }
                 PlaceBuilding(buildPositions);
             }
         }
@@ -98,9 +110,10 @@ public class BuildingSystem : MonoBehaviour
             buildingPreview.ChangeState(Support.PreviewState.Negative);
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Delete))
         {
-            buildingPreview.Rotate(90);
+            Destroy(buildingPreview.gameObject);
+            buildingPreview = null;
         }
     }
 
@@ -122,12 +135,19 @@ public class BuildingSystem : MonoBehaviour
         {
             floorPreview.ChangeState(Support.PreviewState.Negative);
         }
+
+        if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            Destroy(floorPreview.gameObject);
+            floorPreview = null;
+        }
     }
 
     private void PlaceBuilding(List<Vector3> buildingPositions)
     {
         Building building = Instantiate(buildingPrefab, buildingPreview.transform.position, Quaternion.identity);
-        building.Setup(buildingPreview.buildingData, buildingPreview.buildingModel.rotation);
+        building.Setup(buildingPreview.buildingData);
+        shapeUnits.Add(building.GetComponentInChildren<BuildingShapeUnit>());
         grid.SetBuilding(building, buildingPositions);
         Destroy(buildingPreview.gameObject);
         buildingPreview = null;
@@ -140,9 +160,17 @@ public class BuildingSystem : MonoBehaviour
         DestroyObject();
 
         FloorBuilding floorBuilding = Instantiate(floorBuildingPrefab, floorPreview.transform.position, Quaternion.identity);
-        floorBuilding.Setup(floorPreview.floorData, floorPreview.buildingModel.rotation);
+        floorBuilding.Setup(floorPreview.floorData);
         floorBuilding.transform.position -= new Vector3(0, 0.5f, 0);
+        shapeUnits.Add(floorBuilding.GetComponentInChildren<BuildingShapeUnit>());
         grid.SetFloor(floorBuilding, buildingPositions);
+        if(floorPreview.floorData.name == "NoBuildData")
+        {
+            GameObject fakeBuild = new();
+            fakeBuild.AddComponent<Building>();
+            fakeBuild.transform.SetParent(floorBuilding.transform);
+            grid.SetBuilding(fakeBuild.GetComponent<Building>(), buildingPositions);
+        }
         Destroy(floorPreview.gameObject);
         floorPreview = null;
 
@@ -183,7 +211,6 @@ public class BuildingSystem : MonoBehaviour
         }
     }
 
-
     private void InstantiateFloor()
     {
         for (int x = 0; x < Support.GridWidth; x++)
@@ -192,7 +219,8 @@ public class BuildingSystem : MonoBehaviour
             {
                 FloorBuilding newObject = Instantiate(standardFloor, new Vector3(x * BuildingSystem.cellSize + 0.5f, -0.5f, y * BuildingSystem.cellSize + 0.5f), Quaternion.identity);
                 newObject.transform.SetParent(transform);
-                newObject.Setup(grassData, 0f);
+                newObject.Setup(grassData);
+
 
                 allFloors.Add(newObject);
             }
@@ -245,6 +273,11 @@ public class BuildingSystem : MonoBehaviour
         return allFloors;
     }
 
+    private List<Vector3> GetBuildingPositions(List<BuildingShapeUnit> shapeUnits)
+    {
+        return shapeUnits.Select(unit => unit.transform.position).ToList();
+    }
+
     private void ClearCurrentPreview()
     {
         if (buildingPreview != null)
@@ -270,7 +303,6 @@ public class BuildingSystem : MonoBehaviour
     public void SpawnTree()
     {
         SpawnBuilding(treeData);
-
     }
 
     public void SpawnBushe()
