@@ -6,6 +6,7 @@ public class BuildingSystem : MonoBehaviour
 {
     public const float cellSize = 1f;
 
+    [SerializeField] private PillarMath pillarMath;
     [SerializeField] private BuildingData treeData;
     [SerializeField] private BuildingData bushData;
     [SerializeField] private BuildingData flowerData;
@@ -262,11 +263,13 @@ public class BuildingSystem : MonoBehaviour
         ClearCurrentPreview();
 
         buildingPreview = CreateBuildingPreview(data, mousePos);
+        pillarMath.Recalculate();
     }
 
     public void SpawnTree()
     {
         SpawnBuilding(treeData);
+
     }
 
     public void SpawnBushe()
@@ -296,5 +299,6 @@ public class BuildingSystem : MonoBehaviour
         ClearCurrentPreview();
 
         floorPreview = CreateFloorPreview(dirtData, mousePos);
+        pillarMath.Recalculate();
     }
 }

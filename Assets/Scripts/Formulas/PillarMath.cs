@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class PillarMath : MonoBehaviour
 {
-    private BuildingSystem bSystem;
-    private List<Building> allBuildings = new();
-    private List<FloorBuilding> allFloors = new();
+    [SerializeField] private BuildingSystem bSystem; private List<Building> allBuildings = new();
+    [SerializeField] private List<FloorBuilding> allFloors = new();
 
     private int nrOfPaved;
     private int nrOfLeakThrough;
@@ -27,6 +26,12 @@ public class PillarMath : MonoBehaviour
 
     public int nrOfPlantTypes;
 
+    //I will display these variables on the UI
+    private float pillar1Score;
+    private float pillar2Score;
+    private float pillar3Score;
+    private float pillar4Score;
+
     public void Start()
     {
         Setup();
@@ -41,26 +46,32 @@ public class PillarMath : MonoBehaviour
         allFloors = allFloorsCopy;
 
         GetAllNumbers(allBuildings, allFloors);
+
+         //This method will start the calculations
+        CalculateAllPillars();
+
+        FindFirstObjectByType<PillarUI>().UpdateUI();
     }
 
     public void CalculatePillar1()
     {
-        StaticFormulas.P1Water(GetTotalArea(), nrOfPaved, nrOfLeakThrough, nrOfUnpaved, nrOfFlower, nrOfGrass, nrOfBush, nrOfTree);
+         pillar1Score = StaticFormulas.P1Water(GetTotalArea(), nrOfPaved, nrOfLeakThrough, nrOfUnpaved, nrOfFlower, nrOfGrass, nrOfBush, nrOfTree);
     }
 
     public void CalculatePillar2()
     {
-        StaticFormulas.P2Soil(fertilizer, cleanupStyle);
+
+         pillar2Score = StaticFormulas.P2Soil(fertilizer, cleanupStyle);
     }
 
     public void CalculatePillar3()
     {
-        StaticFormulas.P3Environment(nrOfInsects, nrOfBirds, nrOfSpiders, nrOfOtherAnimals, totalPlants, totalArea);
+        pillar3Score = StaticFormulas.P3Environment(nrOfInsects, nrOfBirds, nrOfSpiders, nrOfOtherAnimals, totalPlants, totalArea);
     }
 
     public void CalculatePillar4()
     {
-        StaticFormulas.P4PlantDiversity(nrOfFlower, nrOfGrass, nrOfBush, nrOfTree, totalArea, nrOfPlantTypes);
+        pillar4Score = StaticFormulas.P4PlantDiversity(nrOfFlower, nrOfGrass, nrOfBush, nrOfTree, totalArea, nrOfPlantTypes);
     }
 
     private int GetTotalArea()
@@ -68,6 +79,45 @@ public class PillarMath : MonoBehaviour
         totalArea = Support.GridHeight * Support.GridWidth;
 
         return totalArea;
+    }
+
+    public float Pillar1Score => pillar1Score;
+    public float Pillar2Score => pillar2Score;
+    public float Pillar3Score => pillar3Score;
+    public float Pillar4Score => pillar4Score;
+
+    private void CalculateAllPillars()
+    {
+        CalculatePillar1();
+        CalculatePillar2();
+        CalculatePillar3();
+        CalculatePillar4();
+    }
+
+    //We need this method to invok calculation every time a user add an object to the scene
+    public void Recalculate()
+    {
+        //There is an accumulation problem and I think this resolve it
+        nrOfPaved = 0;
+        nrOfLeakThrough = 0;
+        nrOfUnpaved = 0;
+        nrOfGrass = 0;
+        nrOfFlower = 0;
+        nrOfBush = 0;
+        nrOfTree = 0;
+        totalPlants = 0;
+
+        allBuildings = bSystem.GetAllBuildings();
+        allFloors = bSystem.GetAllFloors();
+
+        List<FloorBuilding> allFloorsCopy = FilterGrassWithoutPlants();
+        allFloors = allFloorsCopy;
+
+        GetAllNumbers(allBuildings, allFloors);
+
+        CalculateAllPillars();
+
+        FindFirstObjectByType<PillarUI>()?.UpdateUI();
     }
 
     private List<FloorBuilding> FilterGrassWithoutPlants()
@@ -170,5 +220,9 @@ public class PillarMath : MonoBehaviour
             }
         }
         Debug.Log("All numbers (paved, leak through, unpaved, grass, flower, bush, tree " + nrOfPaved + ", " + nrOfLeakThrough + ", " + nrOfUnpaved + ", " + nrOfGrass + ", " + nrOfFlower + ", " + nrOfBush + ", " + nrOfTree);
+
+
+       
+
     }
 }
