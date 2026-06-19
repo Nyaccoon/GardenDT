@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abd775c75e48eba4cbed66116582cbc6, type: 3}
-  m_Name: TileData
+  m_Name: NoBuildData
   m_EditorClassIdentifier: Assembly-CSharp::FloorData
-  <floorModel>k__BackingField: {fileID: 7969760887656374512, guid: 6fd2e756bc5439f4ca95141312851aa6, type: 3}
-  <floorType>k__BackingField: 0
+  <floorModel>k__BackingField: {fileID: 2105157353473826795, guid: b053fed5d0f38654d8372399b88cab65, type: 3}
+  <floorType>k__BackingField: 7

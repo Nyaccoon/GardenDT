@@ -16,10 +16,11 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private FloorData dirtData;
     [SerializeField] private FloorData grassData;
     [SerializeField] private FloorData gravelData;
-    //[SerializeField] private FloorData leakThroughTileData;
-    //[SerializeField] private FloorData sandData;
-    //[SerializeField] private FloorData tileData;
-    //[SerializeField] private FloorData waterData;
+    [SerializeField] private FloorData leakThroughTileData;
+    [SerializeField] private FloorData sandData;
+    [SerializeField] private FloorData tileData;
+    [SerializeField] private FloorData waterData;
+    [SerializeField] private FloorData noBuildData;
 
     [SerializeField] private BuildingPreview previewPrefab;
     [SerializeField] private Building buildingPrefab;
@@ -72,6 +73,10 @@ public class BuildingSystem : MonoBehaviour
             {
                 buildingPreview = CreateBuildingPreview(trampData, mousePos);
             }
+            else if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                floorPreview = CreateFloorPreview(noBuildData, mousePos);
+            }
             else if (Input.GetKeyDown(KeyCode.Alpha9))
             {
                 floorPreview = CreateFloorPreview(dirtData, mousePos);
@@ -83,6 +88,8 @@ public class BuildingSystem : MonoBehaviour
     {
         buildingPreview.transform.position = mouseWorldPos;
         List<Vector3> buildPositions = buildingPreview.buildingModel.GetAllBuildingPositions();
+        List<Vector3> floorPositions = floorPreview.buildingModel.GetAllBuildingPositions();
+
         bool canBuild = grid.CanBuildBuilding(buildPositions);
         if (canBuild)
         {
@@ -269,7 +276,6 @@ public class BuildingSystem : MonoBehaviour
     public void SpawnTree()
     {
         SpawnBuilding(treeData);
-
     }
 
     public void SpawnBushe()

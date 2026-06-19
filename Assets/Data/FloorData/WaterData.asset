@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd775c75e48eba4cbed66116582cbc6, type: 3}
   m_Name: WaterData
   m_EditorClassIdentifier: Assembly-CSharp::FloorData
-  <material>k__BackingField: {fileID: 2100000, guid: be8ddb026dde6a7428688df96f4fbe00, type: 2}
+  <floorModel>k__BackingField: {fileID: 27981938519638643, guid: 55d4963072d0b174eb1f7483e75942d0, type: 3}
   <floorType>k__BackingField: 0

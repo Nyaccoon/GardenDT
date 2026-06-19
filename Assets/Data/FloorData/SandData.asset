@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd775c75e48eba4cbed66116582cbc6, type: 3}
   m_Name: SandData
   m_EditorClassIdentifier: Assembly-CSharp::FloorData
-  <material>k__BackingField: {fileID: 2100000, guid: 98ba8a49ba5c31341af9f6e1fde29f1f, type: 2}
+  <floorModel>k__BackingField: {fileID: 433353630694217154, guid: 4e7a95c631799274bb9af94ed5422c17, type: 3}
   <floorType>k__BackingField: 2
