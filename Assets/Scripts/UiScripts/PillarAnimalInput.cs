@@ -3,8 +3,6 @@ using TMPro;
 
 public class PillarAnimalInput : MonoBehaviour
 {
-    [SerializeField] private PillarMath pillarMath;
-
     [SerializeField] private TMP_InputField insectsInput;
     [SerializeField] private TMP_InputField birdsInput;
     [SerializeField] private TMP_InputField spidersInput;
@@ -12,14 +10,12 @@ public class PillarAnimalInput : MonoBehaviour
 
     public void ApplyValues()
     {
-        if (pillarMath == null) return;
+        PillarSettings.nrOfInsects = Parse(insectsInput);
+        PillarSettings.nrOfBirds = Parse(birdsInput);
+        PillarSettings.nrOfSpiders = Parse(spidersInput);
+        PillarSettings.nrOfOtherAnimals = Parse(otherAnimalsInput);
 
-        pillarMath.nrOfInsects = Parse(insectsInput);
-        pillarMath.nrOfBirds = Parse(birdsInput);
-        pillarMath.nrOfSpiders = Parse(spidersInput);
-        pillarMath.nrOfOtherAnimals = Parse(otherAnimalsInput);
-
-        pillarMath.Recalculate();  
+        //pillarMath.Recalculate();  
     }
 
     private int Parse(TMP_InputField input)
