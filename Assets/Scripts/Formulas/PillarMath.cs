@@ -37,20 +37,29 @@ public class PillarMath : MonoBehaviour
         Setup();
     }
 
-    private void Setup()
+    private void ReloadAndCalculate()
     {
+        nrOfInsects = PillarSettings.nrOfInsects;
+        nrOfBirds = PillarSettings.nrOfBirds;
+        nrOfSpiders = PillarSettings.nrOfSpiders;
+        nrOfOtherAnimals = PillarSettings.nrOfOtherAnimals;
+
         allBuildings = bSystem.GetAllBuildings();
         allFloors = bSystem.GetAllFloors();
 
-        List<FloorBuilding> allFloorsCopy = FilterGrassWithoutPlants();
-        allFloors = allFloorsCopy;
+        allFloors = FilterGrassWithoutPlants();
 
         GetAllNumbers(allBuildings, allFloors);
-
-         //This method will start the calculations
         CalculateAllPillars();
 
-        FindFirstObjectByType<PillarUI>().UpdateUI();
+        FindFirstObjectByType<PillarUI>()?.UpdateUI();
+    }
+
+
+    private void Setup()
+    {
+
+        ReloadAndCalculate();
     }
 
     public void CalculatePillar1()
@@ -97,27 +106,7 @@ public class PillarMath : MonoBehaviour
     //We need this method to invok calculation every time a user add an object to the scene
     public void Recalculate()
     {
-        //There is an accumulation problem and I think this resolve it
-        nrOfPaved = 0;
-        nrOfLeakThrough = 0;
-        nrOfUnpaved = 0;
-        nrOfGrass = 0;
-        nrOfFlower = 0;
-        nrOfBush = 0;
-        nrOfTree = 0;
-        totalPlants = 0;
-
-        allBuildings = bSystem.GetAllBuildings();
-        allFloors = bSystem.GetAllFloors();
-
-        List<FloorBuilding> allFloorsCopy = FilterGrassWithoutPlants();
-        allFloors = allFloorsCopy;
-
-        GetAllNumbers(allBuildings, allFloors);
-
-        CalculateAllPillars();
-
-        FindFirstObjectByType<PillarUI>()?.UpdateUI();
+        ReloadAndCalculate();
     }
 
     private List<FloorBuilding> FilterGrassWithoutPlants()
