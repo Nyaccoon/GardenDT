@@ -25,7 +25,6 @@ public class LoadButton : MonoBehaviour
         string json = te.SelectedText;
         print(json);
         WrapperDTO wrap = JsonConvert.DeserializeObject<WrapperDTO>(json);
-        print(wrap.objects[0].type);
         foreach (var obj in wrap.objects)
         {
             BuildingData data = new();
