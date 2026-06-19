@@ -13,6 +13,7 @@ public class BuildingModel : MonoBehaviour
     private void Awake()
     {
         shapeUnits = GetComponentsInChildren<BuildingShapeUnit>();
+        print(shapeUnits.Last().name);
     }
 
     public List<Vector3> GetAllBuildingPositions()
