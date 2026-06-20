@@ -8,6 +8,7 @@ public class BuildingSystem : MonoBehaviour
     public const float cellSize = 1f;
 
     [SerializeField] private PillarMath pillarMath;
+
     [SerializeField] private BuildingData treeData;
     [SerializeField] private BuildingData bushData;
     [SerializeField] private BuildingData flowerData;
@@ -76,6 +77,14 @@ public class BuildingSystem : MonoBehaviour
             {
                 buildingPreview = CreateBuildingPreview(trampData, mousePos);
             }
+            else if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                floorPreview = CreateFloorPreview(waterData, mousePos);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                floorPreview = CreateFloorPreview(gravelData, mousePos);
+            }
             else if (Input.GetKeyDown(KeyCode.Alpha8))
             {
                 floorPreview = CreateFloorPreview(noBuildData, mousePos);
@@ -83,6 +92,22 @@ public class BuildingSystem : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Alpha9))
             {
                 floorPreview = CreateFloorPreview(dirtData, mousePos);
+            }
+            else if (Input.GetKeyDown(KeyCode.G))
+            {
+                floorPreview = CreateFloorPreview(grassData, mousePos);
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                floorPreview = CreateFloorPreview(sandData, mousePos);
+            }
+            else if (Input.GetKeyDown(KeyCode.T))
+            {
+                floorPreview = CreateFloorPreview(tileData, mousePos);
+            }
+            else if (Input.GetKeyDown(KeyCode.L))
+            {
+                floorPreview = CreateFloorPreview(leakThroughTileData, mousePos);
             }
         }
     }

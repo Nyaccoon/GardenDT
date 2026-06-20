@@ -2,7 +2,7 @@ using UnityEngine;
  
 public static class Support
 {
-    public static int GridWidth = 10;
+    public static int GridWidth = 5;
     public static int GridHeight = 10;
 
     public enum FloorType
