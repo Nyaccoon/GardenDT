@@ -70,6 +70,7 @@ public class BuildingGrid : MonoBehaviour
     private void DrawLine(Vector3[] pos, float width)
     {
         GameObject newLine = new GameObject("Line");
+        newLine.transform.SetParent(transform);
         _lineRenderer = newLine.AddComponent<LineRenderer>();
         _lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         _lineRenderer.startWidth = width;
