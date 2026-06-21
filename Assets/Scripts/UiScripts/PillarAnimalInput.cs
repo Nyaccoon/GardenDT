@@ -7,6 +7,7 @@ public class PillarAnimalInput : MonoBehaviour
     [SerializeField] private TMP_InputField birdsInput;
     [SerializeField] private TMP_InputField spidersInput;
     [SerializeField] private TMP_InputField otherAnimalsInput;
+    [SerializeField] private TMP_InputField TypesOfPlantsInput;
 
     public void ApplyValues()
     {
@@ -14,6 +15,8 @@ public class PillarAnimalInput : MonoBehaviour
         PillarSettings.nrOfBirds = Parse(birdsInput);
         PillarSettings.nrOfSpiders = Parse(spidersInput);
         PillarSettings.nrOfOtherAnimals = Parse(otherAnimalsInput);
+        PillarSettings.nrOfPlanstType = Parse(TypesOfPlantsInput);
+
 
         //pillarMath.Recalculate();  
     }

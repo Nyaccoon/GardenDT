@@ -4,12 +4,15 @@ public class UIManager : MonoBehaviour
 {
     public GameObject panelFloor;
     public GameObject panelPlants;
+    public GameObject settingsPanel;
 
     void Start()
     {
-        ShowPanelFloor();
+        // Disable all panels at the beginning of the scene
+        panelFloor.SetActive(false);
+        panelPlants.SetActive(false);
+        settingsPanel.SetActive(false);
     }
-
     public void ShowPanelFloor()
     {
         panelFloor.SetActive(true);
@@ -21,4 +24,5 @@ public class UIManager : MonoBehaviour
         panelFloor.SetActive(false);
         panelPlants.SetActive(true);
     }
+
 }

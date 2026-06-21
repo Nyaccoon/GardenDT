@@ -43,6 +43,8 @@ public class PillarMath : MonoBehaviour
         nrOfBirds = PillarSettings.nrOfBirds;
         nrOfSpiders = PillarSettings.nrOfSpiders;
         nrOfOtherAnimals = PillarSettings.nrOfOtherAnimals;
+        nrOfPlantTypes = PillarSettings.nrOfPlanstType;
+
 
         allBuildings = bSystem.GetAllBuildings();
         allFloors = bSystem.GetAllFloors();
@@ -117,10 +119,14 @@ public class PillarMath : MonoBehaviour
         {
             foreach (FloorBuilding floor in allFloors)
             {
+                if (floor == null)
+                    continue;
+
                 if ((building.transform.position - new Vector3(0, 0.5f, 0)) == floor.transform.position)
                 {
                     allFloorsCopy.Remove(floor);
                 }
+
             }
         }
 

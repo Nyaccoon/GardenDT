@@ -6,4 +6,5 @@ public class PillarSettings : MonoBehaviour
     public static int nrOfBirds = 0;
     public static int nrOfSpiders = 0;
     public static int nrOfOtherAnimals = 0;
+    public static int nrOfPlanstType= 0;
 }
