@@ -7158,10 +7158,10 @@ MonoBehaviour:
   allFloors: []
   fertilizer: 8
   cleanupStyle: 1
-  nrOfInsects: 0
-  nrOfBirds: 0
-  nrOfSpiders: 0
-  nrOfOtherAnimals: 0
+  Insects: 0
+  Birds: 0
+  Spiders: 0
+  OtherAnimals: 0
   nrOfPlantTypes: 0
 --- !u!1 &1306642070
 GameObject:
