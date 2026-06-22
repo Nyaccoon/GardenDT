@@ -119,10 +119,14 @@ public class PillarMath : MonoBehaviour
         {
             foreach (FloorBuilding floor in allFloors)
             {
+                if (floor == null)
+                    continue;
+
                 if ((building.transform.position - new Vector3(0, 0.5f, 0)) == floor.transform.position)
                 {
                     allFloorsCopy.Remove(floor);
                 }
+
             }
         }
 

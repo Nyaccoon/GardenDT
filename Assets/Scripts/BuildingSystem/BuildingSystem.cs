@@ -57,58 +57,58 @@ public class BuildingSystem : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                buildingPreview = CreateBuildingPreview(treeData, mousePos);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                buildingPreview = CreateBuildingPreview(bushData, mousePos);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                buildingPreview = CreateBuildingPreview(flowerData, mousePos);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                buildingPreview = CreateBuildingPreview(vegGarData, mousePos);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                buildingPreview = CreateBuildingPreview(trampData, mousePos);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                floorPreview = CreateFloorPreview(waterData, mousePos);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha7))
-            {
-                floorPreview = CreateFloorPreview(gravelData, mousePos);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha8))
-            {
-                floorPreview = CreateFloorPreview(noBuildData, mousePos);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha9))
-            {
-                floorPreview = CreateFloorPreview(dirtData, mousePos);
-            }
-            else if (Input.GetKeyDown(KeyCode.G))
-            {
-                floorPreview = CreateFloorPreview(grassData, mousePos);
-            }
-            else if (Input.GetKeyDown(KeyCode.S))
-            {
-                floorPreview = CreateFloorPreview(sandData, mousePos);
-            }
-            else if (Input.GetKeyDown(KeyCode.T))
-            {
-                floorPreview = CreateFloorPreview(tileData, mousePos);
-            }
-            else if (Input.GetKeyDown(KeyCode.L))
-            {
-                floorPreview = CreateFloorPreview(leakThroughTileData, mousePos);
-            }
+            //if (Input.GetKeyDown(KeyCode.Alpha1))
+            //{
+            //    buildingPreview = CreateBuildingPreview(treeData, mousePos);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.Alpha2))
+            //{
+            //    buildingPreview = CreateBuildingPreview(bushData, mousePos);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.Alpha3))
+            //{
+            //    buildingPreview = CreateBuildingPreview(flowerData, mousePos);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.Alpha4))
+            //{
+            //    buildingPreview = CreateBuildingPreview(vegGarData, mousePos);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.Alpha5))
+            //{
+            //    buildingPreview = CreateBuildingPreview(trampData, mousePos);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.Alpha6))
+            //{
+            //    floorPreview = CreateFloorPreview(waterData, mousePos);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.Alpha7))
+            //{
+            //    floorPreview = CreateFloorPreview(gravelData, mousePos);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.Alpha8))
+            //{
+            //    floorPreview = CreateFloorPreview(noBuildData, mousePos);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.Alpha9))
+            //{
+            //    floorPreview = CreateFloorPreview(dirtData, mousePos);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.G))
+            //{
+            //    floorPreview = CreateFloorPreview(grassData, mousePos);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.S))
+            //{
+            //    floorPreview = CreateFloorPreview(sandData, mousePos);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.T))
+            //{
+            //    floorPreview = CreateFloorPreview(tileData, mousePos);
+            //}
+            //else if (Input.GetKeyDown(KeyCode.L))
+            //{
+            //    floorPreview = CreateFloorPreview(leakThroughTileData, mousePos);
+            //}
         }
     }
 
@@ -351,13 +351,53 @@ public class BuildingSystem : MonoBehaviour
         SpawnBuilding(trampData);
     }
 
-    public void SpawnFloor()
+    private void SpawnFloor(FloorData data)
     {
         Vector3 mousePos = GetWorldMousePosition();
 
         ClearCurrentPreview();
 
-        floorPreview = CreateFloorPreview(dirtData, mousePos);
+        floorPreview = CreateFloorPreview(data, mousePos);
         pillarMath.Recalculate();
+    }
+
+    public void SpawnDirt()
+    {
+        SpawnFloor(dirtData);
+    }
+
+    public void SpawnWater()
+    {
+        SpawnFloor(waterData);
+    }
+
+    public void SpawnGravel()
+    {
+        SpawnFloor(gravelData);
+    }
+
+    public void SpawnNoBuild()
+    {
+        SpawnFloor(noBuildData);
+    }
+
+    public void SpawnGrass()
+    {
+        SpawnFloor(grassData);
+    }
+
+    public void SpawnSand()
+    {
+        SpawnFloor(sandData);
+    }
+
+    public void SpawnTile()
+    {
+        SpawnFloor(tileData);
+    }
+
+    public void SpawnLeak()
+    {
+        SpawnFloor(leakThroughTileData);
     }
 }
