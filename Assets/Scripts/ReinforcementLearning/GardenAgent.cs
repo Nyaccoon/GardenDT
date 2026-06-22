@@ -30,6 +30,15 @@ public class GardenAgent : Agent
 
     }
 
+    public override void OnActionReceived(ActionBuffers actions)
+    {
+        // Benodigde acties:
+        //  plaats boom, bosje, bloem, moestuin, trampoline, tegels, grind, doorlektegels, zand, grond, gras, water -> discrete actie
+
+        // Pseudo
+        // float actionTree = actionBuffers.DiscreetActions[0];
+    }
+
     private void CheckLists()
     {
         if(mathComponent.GetAllBuildings() != null)
