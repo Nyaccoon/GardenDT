@@ -18,10 +18,10 @@ public class PillarMath : MonoBehaviour
     public fertilizerCleanupType fertilizer;
     public fertilizerCleanupType cleanupStyle;
 
-    public int nrOfInsects;
-    public int nrOfBirds;
-    public int nrOfSpiders;
-    public int nrOfOtherAnimals;
+    public bool Insects;
+    public bool Birds;
+    public bool Spiders;
+    public bool OtherAnimals;
     private int totalPlants;
 
     public int nrOfPlantTypes;
@@ -39,10 +39,10 @@ public class PillarMath : MonoBehaviour
 
     private void ReloadAndCalculate()
     {
-        nrOfInsects = PillarSettings.nrOfInsects;
-        nrOfBirds = PillarSettings.nrOfBirds;
-        nrOfSpiders = PillarSettings.nrOfSpiders;
-        nrOfOtherAnimals = PillarSettings.nrOfOtherAnimals;
+        Insects = PillarSettings.Insects;
+        Birds = PillarSettings.Birds;
+        Spiders = PillarSettings.Spiders;
+        OtherAnimals = PillarSettings.OtherAnimals;
 
         allBuildings = bSystem.GetAllBuildings();
         allFloors = bSystem.GetAllFloors();
@@ -51,7 +51,9 @@ public class PillarMath : MonoBehaviour
 
         GetAllNumbers(allBuildings, allFloors);
         CalculateAllPillars();
-
+        
+        Debug.Log((allBuildings.Count+ allFloors.Count) + " = " + totalArea + "; " + (totalPlants/totalArea));
+        
         FindFirstObjectByType<PillarUI>()?.UpdateUI();
     }
 
@@ -70,12 +72,12 @@ public class PillarMath : MonoBehaviour
     public void CalculatePillar2()
     {
 
-         pillar2Score = StaticFormulas.P2Soil(fertilizer, cleanupStyle);
+         pillar2Score = StaticFormulas.P2Soil(fertilizer, cleanupStyle,totalPlants,totalArea);
     }
 
     public void CalculatePillar3()
     {
-        pillar3Score = StaticFormulas.P3Environment(nrOfInsects, nrOfBirds, nrOfSpiders, nrOfOtherAnimals, totalPlants, totalArea);
+        pillar3Score = StaticFormulas.P3Environment(Insects, Birds, Spiders, OtherAnimals, totalPlants, totalArea);
     }
 
     public void CalculatePillar4()
@@ -140,6 +142,14 @@ public class PillarMath : MonoBehaviour
 
     private void GetAllNumbers(List<Building> allBuildings, List<FloorBuilding> allFloorsCopy)
     {
+        nrOfPaved = 0;
+        nrOfUnpaved = 0;
+        nrOfLeakThrough = 0;
+        nrOfFlower = 0;
+        nrOfGrass = 0;
+        nrOfBush = 0;
+        nrOfTree = 0;
+        totalPlants = 0;
         foreach (Building building in allBuildings)
         {
             if (building.GetData().floorType == Support.FloorType.Paved)
