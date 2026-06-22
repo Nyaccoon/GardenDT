@@ -209,9 +209,30 @@ public class PillarMath : MonoBehaviour
             }
         }
         Debug.Log("All numbers (paved, leak through, unpaved, grass, flower, bush, tree " + nrOfPaved + ", " + nrOfLeakThrough + ", " + nrOfUnpaved + ", " + nrOfGrass + ", " + nrOfFlower + ", " + nrOfBush + ", " + nrOfTree);
+    }
 
-
-       
-
+    public float GetPillar1Score()
+    {
+        return pillar1Score;
+    }
+    public float GetPillar2Score()
+    {
+        return pillar2Score;
+    }
+    public float GetPillar3Score()
+    {
+        return pillar3Score;
+    }
+    public float GetPillar4Score()
+    {
+        return pillar4Score;
+    }
+    public List<Building> GetAllBuildings()
+    {
+        return allBuildings;
+    }
+    public List<FloorBuilding> GetAllFloors()
+    {
+        return allFloors;
     }
 }
