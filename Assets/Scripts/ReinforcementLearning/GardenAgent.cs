@@ -1,33 +1,36 @@
-using UnityEngine;
+using System;
+using System.Collections.Generic;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Policies;
 using Unity.MLAgents.Sensors;
-using System.Collections.Generic;
-using System;
+using UnityEngine;
 
 public class GardenAgent : Agent
 {
-
+    private int observationsCounter = 0;
     private PillarMath mathComponent;
     private List<Vector3> allBuildings = new();
-    private List<FloorBuilding> allFloors = new();
+    private List<Vector3> allFloors = new();
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Benodigde observaties:
-        //  pillar1
-        //  pillar2
-        //  pillar3
-        //  pillar4
-        //  list<Building> allBuildings
-        //  list<FloorBuilding> allFloors
-        sensor.AddObservation(mathComponent.GetPillar1Score());
-        sensor.AddObservation(mathComponent.GetPillar2Score());
-        sensor.AddObservation(mathComponent.GetPillar3Score());
-        sensor.AddObservation(mathComponent.GetPillar4Score());
         CheckLists();
-        //sensor.AddObservation(allBuildings);
 
+        foreach (var building in allBuildings)
+        {
+            sensor.AddObservation(building);
+            observationsCounter++;
+        }
+
+        foreach(var floor in allFloors)
+        {
+            sensor.AddObservation(floor);
+            observationsCounter++;
+        }
+        Debug.Log("Nr of observations: " + observationsCounter);
+
+        this.gameObject.GetComponent<BehaviorParameters>().BrainParameters.VectorObservationSize = observationsCounter;
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -56,11 +59,15 @@ public class GardenAgent : Agent
 
         if (mathComponent.GetAllFloors() != null)
         {
-            allFloors = mathComponent.GetAllFloors();
+            List<FloorBuilding> tempList = mathComponent.GetAllFloors();
+            foreach (FloorBuilding floorBuilding in tempList)
+            {
+                allFloors.Add(floorBuilding.gameObject.transform.position);
+            }
         }
         else
         {
-            throw new NullReferenceException("Error: list allFloors is void.");
+            throw new NullReferenceException("Error: list allBuildings is void.");
         }
     }
 }
